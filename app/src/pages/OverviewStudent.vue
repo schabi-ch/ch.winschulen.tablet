@@ -16,6 +16,11 @@
     https://ipad-help.muwa.ch/wp-json/wp/v2/categories
     https://ipad-help.muwa.ch/wp-json/wp/v2/posts/7
     https://ipad-help.muwa.ch/wp-json/wp/v2/posts?categories=3
+
+    <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
+      >ERROR: {{ error }}
+      <pre>{{ error }}</pre>
+    </q-banner>
   </q-page>
 </template>
 
@@ -26,7 +31,8 @@ export default {
   data() {
     return {
       response: null,
-      categories: []
+      categories: [],
+      error: null
       /*
       {
           label: 'Node 1',
@@ -52,6 +58,7 @@ export default {
         });
       })
       .catch(error => {
+        this.error = error;
         console.log("error", error);
       });
     this.$q.loading.hide();

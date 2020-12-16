@@ -7,8 +7,9 @@
       {{ article }}
     </div>
     <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
-      >ERROR: {{ error }}</q-banner
-    >
+      >ERROR: {{ error }}
+      <pre>{{ error }}</pre>
+    </q-banner>
   </q-page>
 </template>
 
@@ -27,25 +28,39 @@ export default {
   async created() {
     this.$q.loading.show({ message: "Inhalt wird geladen..." });
     //this.$route.params.id
+    //https://github.com/axios/axios/issues/2505
+
+    const options = {
+      url:
+        "https://ipad-help.muwa.ch/wp-json/wp/v2/posts/" +
+        this.$route.params.id,
+      method: "get"
+    };
+
+    delete options["data"];
+    axios(options)
+      .then(response => {
+        this.article = response.data;
+      })
+      .catch(error => {
+        this.error = error;
+        console.log("error", error);
+      });
+
+    /*
     await axios
       .get(
         "https://ipad-help.muwa.ch/wp-json/wp/v2/posts/" + this.$route.params.id
       )
       .then(response => {
         this.article = response.data;
-        /*
-        const firstLayer = response.data.filter(p => p.parent == 0);
-        firstLayer.forEach(n => {
-          var newNode = { id: n.id, label: n.name };
-          newNode = buildTree(newNode, response.data);
-          this.categories.push(newNode);
-        });
-        */
       })
       .catch(error => {
         this.error = error;
         console.log("error", error);
       });
+     */
+
     this.$q.loading.hide();
   }
 };
