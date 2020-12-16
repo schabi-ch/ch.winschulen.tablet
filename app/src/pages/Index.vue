@@ -1,22 +1,24 @@
 <template>
-  <q-page class="flex flex-center">
-    <div class="text-h2">
-      ❤️-lich Willkommen! Viel Erfolg mit deinem Tablet!
+  <q-page class="flex flex-center q-gutter-md q-pa-md">
+    <div class="text-h2 text-center">
+      ❤️-lich Willkommen und<br />viel Erfolg mit deinem Tablet!
     </div>
-    <div class="q-gutter-md">
-      <q-btn
-        label="Ich bin eine Schülerin oder ein Schüler"
-        color="primary"
-        push
-        to="/sus"
-      ></q-btn>
-      <q-btn
-        label="Ich bin eine Lehrperson"
-        color="primary"
-        push
-        to="/lul"
-      ></q-btn>
-    </div>
+
+    <q-btn
+      label="Ich bin eine Schülerin oder ein Schüler"
+      color="primary"
+      push
+      size="lg"
+      to="/sus"
+    ></q-btn>
+
+    <q-btn
+      size="lg"
+      label="Ich bin eine Lehrerin oder ein Lehrer"
+      color="primary"
+      push
+      to="/lul"
+    ></q-btn>
   </q-page>
 </template>
 

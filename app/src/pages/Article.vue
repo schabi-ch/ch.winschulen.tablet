@@ -5,8 +5,10 @@
       <h1>{{ article.title.rendered }}</h1>
       <div v-html="article.content.rendered"></div>
       {{ article }}
-      <div v-if="error">ERROR: {{ error }}</div>
     </div>
+    <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
+      >ERROR: {{ error }}</q-banner
+    >
   </q-page>
 </template>
 

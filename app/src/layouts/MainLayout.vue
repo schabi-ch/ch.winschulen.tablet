@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -11,6 +11,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
+        <q-btn flat stretch icon="chevron_left" @click="$router.go(-1)"></q-btn>
         <q-toolbar-title>
           Tablet Einführung
         </q-toolbar-title>
@@ -23,7 +24,8 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-grey-1 q-ma-md"
+      side="left"
+      content-class="bg-grey-1 q-pa-md"
     >
       <q-btn-toggle
         v-model="userModeSwitcher"
@@ -76,6 +78,7 @@ export default {
     if (this.$q.localStorage.has("userMode")) {
       this.setUserMode(this.$q.localStorage.getItem("userMode"));
       this.userModeSwitcher = this.userMode;
+      this.$router.replace(`/${this.userMode}`);
     }
   }
 };

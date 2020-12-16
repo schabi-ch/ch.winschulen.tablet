@@ -3,16 +3,16 @@
     <q-page class="flex flex-center">
       <div
         class="q-pa-md row items-start q-gutter-md"
-        @click="$router.push('/lul/checkliste')"
+        @click="$router.push('/lul/dorfrundgang')"
       >
         <q-card class="content-card">
           <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
           <div class="q-pa-md">
             <div class="col text-h6 ellipsis">
-              Checkliste
+              Dorfrundgang
             </div>
             <div class="text-subtitle1">
-              Einführung, 1. Halbtag
+              1. Etappe
             </div>
             <div class="text-caption text-grey">
               Hake die Liste ab.
@@ -63,8 +63,9 @@
 
       <div>
         <h6>LocalStorage</h6>
-        Test:{{test}}<br>
-        LocalStorage: <pre>{{$q.localStorage.getAll()}}</pre>
+        Test:{{ test }}<br />
+        LocalStorage:
+        <pre>{{ $q.localStorage.getAll() }}</pre>
         <q-btn label="Test befüllen" @click="addTest" />
       </div>
     </q-page>
@@ -72,7 +73,7 @@
 </template>
 
 <script>
-import { LocalStorage } from 'quasar'
+import { LocalStorage } from "quasar";
 
 export default {
   data() {
@@ -87,9 +88,7 @@ export default {
       this.test = this.$q.localStorage.getItem("test");
     }
   },
-  created() {
-
-  }
+  created() {}
 };
 </script>
 
