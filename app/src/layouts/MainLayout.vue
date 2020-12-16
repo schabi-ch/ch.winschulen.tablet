@@ -15,7 +15,7 @@
           Tablet Einführung
         </q-toolbar-title>
 
-        <div>v0.0.1</div>
+        <div>v0.1</div>
       </q-toolbar>
     </q-header>
 

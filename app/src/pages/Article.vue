@@ -5,6 +5,7 @@
       <h1>{{ article.title.rendered }}</h1>
       <div v-html="article.content.rendered"></div>
       {{ article }}
+      <div v-if="error">ERROR: {{ error }}</div>
     </div>
   </q-page>
 </template>
@@ -17,7 +18,8 @@ export default {
     return {
       loading: true,
       article: null,
-      response: false
+      response: false,
+      error: null
     };
   },
   async created() {
@@ -39,6 +41,7 @@ export default {
         */
       })
       .catch(error => {
+        this.error = error;
         console.log("error", error);
       });
     this.$q.loading.hide();
