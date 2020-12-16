@@ -60,14 +60,35 @@
           </div>
         </q-card>
       </div>
+
+      <div>
+        <h6>LocalStorage</h6>
+        Test:{{test}}<br>
+        LocalStorage: <pre>{{$q.localStorage.getAll()}}</pre>
+        <q-btn label="Test befüllen" @click="addTest" />
+      </div>
     </q-page>
   </div>
 </template>
 
 <script>
+import { LocalStorage } from 'quasar'
+
 export default {
+  data() {
+    return {
+      test: this.$q.localStorage.getItem("test")
+    };
+  },
   methods: {
-    gotoChecklist() {}
+    gotoChecklist() {},
+    addTest() {
+      this.$q.localStorage.set("test", "hallo welt" + Date.now());
+      this.test = this.$q.localStorage.getItem("test");
+    }
+  },
+  created() {
+
   }
 };
 </script>

@@ -1,0 +1,12 @@
+{
+  "name": "ch.winschulen.tablet",
+  "version": "0.0.1",
+  "description": "Tipps & Tricks zur Nutzung des iPads im Unterricht",
+  "author": "SCHU::COM <schucom@win.ch>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/cli": "^2.0.0",
+    "@capacitor/core": "^2.0.0",
+    "@capacitor/ios": "2.4.4"
+  }
+}

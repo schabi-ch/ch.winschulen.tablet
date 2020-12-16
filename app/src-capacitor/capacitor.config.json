@@ -1,0 +1,12 @@
+{
+  "appId": "ch.winschulen.tablet.test",
+  "appName": "iPad Hilfe",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "server": {
+    "allowNavigation": [
+      "https://ipad-help.muwa.ch/"
+    ]
+  }
+}
