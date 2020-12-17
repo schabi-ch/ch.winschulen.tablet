@@ -23,7 +23,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  name: "PageIndex"
+  name: "PageIndex",
+  computed: {
+    ...mapGetters("app", ["userMode"])
+  },
+  created() {
+    if (this.userMode) {
+      this.$router.replace(`/${this.userMode}`);
+    }
+  }
 };
 </script>

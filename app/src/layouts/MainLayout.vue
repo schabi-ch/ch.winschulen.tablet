@@ -12,8 +12,24 @@
         />
 
         <q-btn flat stretch icon="chevron_left" @click="$router.go(-1)"></q-btn>
+        <q-breadcrumbs class="text-grey" active-color="white">
+          <q-breadcrumbs-el icon="home" to="/" />
+          <!--
+          <q-breadcrumbs-el
+            label="Docs"
+            icon="widgets"
+            to="/start/pick-quasar-flavour"
+          />
+          <q-breadcrumbs-el
+            label="Breadcrumbs"
+            icon="navigation"
+            to="/vue-components/breadcrumbs"
+          />
+          <q-breadcrumbs-el label="Build" icon="build" />
+          -->
+        </q-breadcrumbs>
         <q-toolbar-title>
-          Tablet Einführung
+          Mein Tablet
         </q-toolbar-title>
 
         <div>v0.1</div>
@@ -78,7 +94,6 @@ export default {
     if (this.$q.localStorage.has("userMode")) {
       this.setUserMode(this.$q.localStorage.getItem("userMode"));
       this.userModeSwitcher = this.userMode;
-      this.$router.replace(`/${this.userMode}`);
     }
   }
 };

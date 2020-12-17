@@ -1,15 +1,19 @@
 <template>
-  <q-page class="q-ma-md">
+  <q-page class="q-ma-lg">
     <div v-if="article == null">laden...</div>
     <div v-else>
       <h1>{{ article.title.rendered }}</h1>
       <div v-html="article.content.rendered"></div>
-      {{ article }}
     </div>
     <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
       >ERROR: {{ error }}
       <pre>{{ error }}</pre>
     </q-banner>
+    <q-list bordered class="rounded-borders">
+      <q-expansion-item expand-separator label="Development Infos">
+        <pre>{{ article }}</pre>
+      </q-expansion-item>
+    </q-list>
   </q-page>
 </template>
 
@@ -32,7 +36,7 @@ export default {
 
     const options = {
       url:
-        "https://ipad-help.muwa.ch/wp-json/wp/v2/posts/" +
+        "https://tablet-admin.winschulen.ch/wp-json/wp/v2/posts/" +
         this.$route.params.id,
       method: "get"
     };

@@ -1,12 +1,77 @@
 <template>
   <div>
     <q-page class="flex flex-center">
+      <div class="">
+        <h1>1. Einführungshalbtag</h1>
+      </div>
+      <div>
+        <div
+          class="q-pa-md row items-start q-gutter-md"
+          @click="$router.push('/lul/dorfrundgang')"
+        >
+          <q-card class="content-card" style="width:300px">
+            <q-img src="winterthur.jpg" :ratio="16 / 9" />
+            <div class="q-pa-md">
+              <div class="col text-h6 ellipsis">
+                Dorfrundgang
+              </div>
+              <div class="text-subtitle1">
+                1. Etappe
+              </div>
+              <div class="text-caption text-grey">
+                Hake die Liste ab.
+              </div>
+            </div>
+          </q-card>
+        </div>
+
+        <div
+          @click="$router.push('/artikel/7')"
+          class="q-pa-md row items-start q-gutter-md"
+        >
+          <q-card class="content-card" style="width:300px">
+            <q-img src="winterthur.jpg" :ratio="16 / 9" />
+            <div class="q-pa-md">
+              <div class="col text-h6 ellipsis">
+                Wanderkarte
+              </div>
+              <div class="text-subtitle1">
+                Einführung, 1. Halbtag
+              </div>
+              <div class="text-caption text-grey">
+                Viel Spass.
+              </div>
+            </div>
+          </q-card>
+        </div>
+
+        <div
+          @click="$router.push('/artikel/7')"
+          class="q-pa-md row items-start q-gutter-md"
+        >
+          <q-card class="content-card" style="width:300px">
+            <q-img src="winterthur.jpg" :ratio="16 / 9" />
+            <div class="q-pa-md">
+              <div class="col text-h6 ellipsis">
+                Artikel ID 7
+              </div>
+              <div class="text-subtitle1">
+                Test
+              </div>
+              <div class="text-caption text-grey">
+                Viel Spass.
+              </div>
+            </div>
+          </q-card>
+        </div>
+      </div>
+      <h1 class="flex-break">2. Einführungshalbtag</h1>
       <div
         class="q-pa-md row items-start q-gutter-md"
         @click="$router.push('/lul/dorfrundgang')"
       >
-        <q-card class="content-card">
-          <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+        <q-card class="content-card" style="width:300px">
+          <q-img src="winterthur.jpg" :ratio="16 / 9" />
           <div class="q-pa-md">
             <div class="col text-h6 ellipsis">
               Dorfrundgang
@@ -19,54 +84,6 @@
             </div>
           </div>
         </q-card>
-      </div>
-
-      <div
-        @click="$router.push('/artikel/7')"
-        class="q-pa-md row items-start q-gutter-md"
-      >
-        <q-card class="content-card">
-          <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
-          <div class="q-pa-md">
-            <div class="col text-h6 ellipsis">
-              Wanderkarte
-            </div>
-            <div class="text-subtitle1">
-              Einführung, 1. Halbtag
-            </div>
-            <div class="text-caption text-grey">
-              Viel Spass.
-            </div>
-          </div>
-        </q-card>
-      </div>
-
-      <div
-        @click="$router.push('/artikel/7')"
-        class="q-pa-md row items-start q-gutter-md"
-      >
-        <q-card class="content-card">
-          <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
-          <div class="q-pa-md">
-            <div class="col text-h6 ellipsis">
-              Artikel ID 7
-            </div>
-            <div class="text-subtitle1">
-              Test
-            </div>
-            <div class="text-caption text-grey">
-              Viel Spass.
-            </div>
-          </div>
-        </q-card>
-      </div>
-
-      <div>
-        <h6>LocalStorage</h6>
-        Test:{{ test }}<br />
-        LocalStorage:
-        <pre>{{ $q.localStorage.getAll() }}</pre>
-        <q-btn label="Test befüllen" @click="addTest" />
       </div>
     </q-page>
   </div>

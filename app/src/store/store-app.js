@@ -22,7 +22,6 @@ const mutations = {
       var index = state.tasksDone.indexOf(payload.id);
       state.tasksDone.splice(index, 1);
     }
-    console.log("tasksDone", state.tasksDone);
     LocalStorage.set("tasksDone", state.tasksDone);
   }
 };
@@ -35,7 +34,7 @@ const actions = {
     commit("setTaskDone", payload);
   },
   getAllTasksDone({ commit }) {
-    if (state.tasksDone.length == 0) {
+    if (state.tasksDone.length == 0 && LocalStorage.has("tasksDone")) {
       commit("setAllTasksDone", LocalStorage.getItem("tasksDone"));
     }
     return state.tasksDone;

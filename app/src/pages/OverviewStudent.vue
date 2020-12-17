@@ -47,7 +47,9 @@ export default {
   async created() {
     this.$q.loading.show({ message: "PDF wird zusammengebaut..." });
     await axios
-      .get("https://ipad-help.muwa.ch/wp-json/wp/v2/categories?per_page=100")
+      .get(
+        "https://tablet-admin.winschulen.ch/wp-json/wp/v2/categories?per_page=100"
+      )
       .then(response => {
         this.response = response.data;
         const firstLayer = response.data.filter(p => p.parent == 0);

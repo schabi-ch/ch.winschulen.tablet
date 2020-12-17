@@ -19,13 +19,14 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-      
       'axios',
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
-      'app.scss'
+      'app.scss',
+      'wp-block-library.scss',
+      'generate-press.scss'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -120,9 +121,9 @@ cfg.module.rules.push({
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `iPad Hilfe`,
-        short_name: `iPad Hilfe`,
-        description: `Tipps & Tricks zur Nutzung des iPads im Unterricht`,
+        name: `Mein Tablet`,
+        short_name: `Mein Tablet`,
+        description: `Einführung in die Nutzung des iPads im Unterricht`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -154,7 +155,18 @@ cfg.module.rules.push({
             type: 'image/png'
           }
         ]
-      }
+      },
+       metaVariables: {
+          appleMobileWebAppCapable: 'yes',
+          appleMobileWebAppStatusBarStyle: 'default',
+          appleTouchIcon120: 'icons/apple-icon-120x120.png',
+          appleTouchIcon180: 'icons/apple-icon-180x180.png',
+          appleTouchIcon152: 'icons/apple-icon-152x152.png',
+          appleTouchIcon167: 'icons/apple-icon-167x167.png',
+          appleSafariPinnedTab: 'icons/safari-pinned-tab.svg',
+          msapplicationTileImage: 'icons/ms-icon-144x144.png',
+          msapplicationTileColor: '#000000'
+        },
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
