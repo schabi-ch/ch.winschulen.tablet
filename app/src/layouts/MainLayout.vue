@@ -1,38 +1,61 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar style="padding:0">
         <q-btn
           flat
+          stretch
+          v-if="previousRoute != null"
+          icon="chevron_left"
+          @click="goBack"
+        ></q-btn>
+
+        <q-space />
+        <q-btn
+          flat
+          stretch
+          icon="home"
+          @click="$router.push({ name: 'home' })"
+          class="q-mr-md"
+        ></q-btn>
+        <q-input
+          rounded
+          outlined
           dense
-          round
-          icon="menu"
-          aria-label="Menu"
+          v-model="searchInput"
+          color="primary"
+          bg-color="grey-2"
+          @keyup.enter="searchArticle"
+        >
+          <template v-slot:append>
+            <q-btn icon="search" round flat @click="searchArticle" />
+          </template>
+        </q-input>
+        <q-btn
+          flat
+          stretch
+          icon="toc"
+          class="q-ml-md"
+          aria-label="Inhaltsverzeichnis"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
+        <q-space />
 
-        <q-btn flat stretch icon="chevron_left" @click="$router.go(-1)"></q-btn>
-        <q-breadcrumbs class="text-grey" active-color="white">
-          <q-breadcrumbs-el icon="home" to="/" />
-          <!--
-          <q-breadcrumbs-el
-            label="Docs"
-            icon="widgets"
-            to="/start/pick-quasar-flavour"
-          />
-          <q-breadcrumbs-el
-            label="Breadcrumbs"
-            icon="navigation"
-            to="/vue-components/breadcrumbs"
-          />
-          <q-breadcrumbs-el label="Build" icon="build" />
-          -->
-        </q-breadcrumbs>
-        <q-toolbar-title>
-          Mein Tablet
-        </q-toolbar-title>
-
-        <div>v0.1</div>
+        <q-btn flat stretch icon="more_horiz">
+          <q-menu>
+            <q-list style="min-width: 100px">
+              <q-item clickable @click="openBackend">
+                <q-item-section>Backend</q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item>
+                <q-item-section class="font-xs"
+                  >Version 0.1<br />24.12.2020</q-item-section
+                >
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -41,23 +64,23 @@
       show-if-above
       bordered
       side="left"
-      content-class="bg-grey-1 q-pa-md"
+      content-class="bg-grey-1"
     >
-      <q-btn-toggle
-        v-model="userModeSwitcher"
-        toggle-color="primary"
-        @click="switchUserMode"
-        :options="[
-          { label: 'LP', value: 'lul' },
-          { label: 'SuS', value: 'sus' }
-        ]"
-      />
-
-      <div class="q-mt-lg">
-        <i>Backend: </i>
-        <a href="https://ipad-help.muwa.ch" target="_blank"
-          >https://ipad-help.muwa.ch</a
-        >
+      <toc-categories />
+      <div class="q-ma-md font-sm">
+        <div class="q-py-sm">Ansicht wechseln:</div>
+        <q-btn-toggle
+          v-model="userModeSwitcher"
+          toggle-color="primary"
+          class="font-sm"
+          no-caps
+          rounded
+          @click="switchUserMode"
+          :options="[
+            { label: 'Lehrperson', value: 'lul' },
+            { label: 'Schüler_in', value: 'sus' }
+          ]"
+        />
       </div>
     </q-drawer>
 
@@ -68,26 +91,41 @@
 </template>
 
 <script>
+import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
-import EssentialLink from "components/EssentialLink.vue";
+import TocCategories from "components/TocCategories.vue";
 
 export default {
   name: "MainLayout",
-  components: {},
+  components: { TocCategories },
   computed: {
-    ...mapGetters("app", ["userMode"])
+    ...mapGetters("app", ["userMode", "previousRoute"])
   },
   data() {
     return {
       leftDrawerOpen: false,
-      userModeSwitcher: null
+      userModeSwitcher: null,
+      searchInput: ""
     };
   },
   methods: {
-    ...mapActions("app", ["setUserMode"]),
+    ...mapActions("app", ["setUserMode", "getCategories", "search"]),
     switchUserMode() {
       this.setUserMode(this.userModeSwitcher);
       this.$router.push(`/${this.userModeSwitcher}`);
+    },
+    openBackend() {
+      window.open("https://tablet-admin.winschulen.ch/wp-admin", "_blank");
+    },
+    goBack() {
+      console.log("go back", this.previousRoute);
+      this.$router.go(-1);
+    },
+    async searchArticle() {
+      this.search(this.searchInput);
+      this.$router.push({
+        name: "search"
+      });
     }
   },
   created() {

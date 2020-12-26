@@ -88,20 +88,6 @@ html {
 }
 
 /**
- * 1. Change the font styles in all browsers.
- * 2. Remove the margin in Firefox and Safari.
-*/
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  margin: 0;
-}
-
-/**
  * 1. Correct the odd appearance in Chrome and Safari.
  * 2. Correct the outline style in Safari.
  */
@@ -377,41 +363,6 @@ img {
   /* Make sure images are scaled correctly. */
   max-width: 100%;
   /* Adhere to container width. */
-}
-
-/*--------------------------------------------------------------
-# Forms
---------------------------------------------------------------*/
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  background: #55555e;
-  color: #fff;
-  border: 1px solid transparent;
-  cursor: pointer;
-  -webkit-appearance: button;
-  /* Corrects inability to style clickable 'input' types in iOS */
-  padding: 10px 20px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="number"],
-textarea,
-select {
-  border: 1px solid;
-  border-radius: 0;
-  padding: 10px 15px;
-  max-width: 100%;
-}
-
-textarea {
-  width: 100%;
 }
 
 /*--------------------------------------------------------------

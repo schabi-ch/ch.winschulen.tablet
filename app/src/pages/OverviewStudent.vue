@@ -44,41 +44,8 @@ export default {
         */
     };
   },
-  async created() {
-    this.$q.loading.show({ message: "PDF wird zusammengebaut..." });
-    await axios
-      .get(
-        "https://tablet-admin.winschulen.ch/wp-json/wp/v2/categories?per_page=100"
-      )
-      .then(response => {
-        this.response = response.data;
-        const firstLayer = response.data.filter(p => p.parent == 0);
-        firstLayer.forEach(n => {
-          var newNode = { id: n.id, label: n.name };
-          newNode = buildTree(newNode, response.data);
-          this.categories.push(newNode);
-        });
-      })
-      .catch(error => {
-        this.error = error;
-        console.log("error", error);
-      });
-    this.$q.loading.hide();
-  }
+  async created() {}
 };
-
-function buildTree(node, data) {
-  const nextLayer = data.filter(p => p.parent == node.id);
-  if (nextLayer.length > 0) {
-    node.children = [];
-    nextLayer.forEach(n => {
-      var newNode = { id: n.id, label: n.name };
-      newNode = buildTree(newNode, data);
-      node.children.push(newNode);
-    });
-  }
-  return node;
-}
 </script>
 
 <style></style>

@@ -4,11 +4,14 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      { path: '', name: 'home', component: () => import('pages/Index.vue') },
       { path: '/lul', component: () => import('pages/OverviewTeacher.vue') },
       { path: '/sus', component: () => import('pages/OverviewStudent.vue') },
       { path: '/lul/dorfrundgang', component: () => import('pages/checklists/Dorfrundgang.vue') },
-      { path: '/artikel/:id', component: () => import('pages/Article.vue') }
+      { path: '/artikel/:id', component: () => import('pages/Article.vue') },
+      { path: '/kategorie/:id', component: () => import('pages/Category.vue') },
+      { path: '/tests', component: () => import('pages/Tests.vue') },
+      { path: '/suche', name: 'search', component: () => import('pages/Search.vue') }
     ]
   },
 

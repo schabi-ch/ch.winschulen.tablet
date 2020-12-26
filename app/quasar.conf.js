@@ -7,7 +7,7 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
 
-module.exports = function (/* ctx */) {
+module.exports = function (ctx) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -46,7 +46,15 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
-
+      env: ctx.dev
+        ? {
+            // so on dev we'll have
+            API: "https://tablet-admin.winschulen.ch/wp-json/wp/v2/",
+          }
+        : {
+            // and on build (production):
+            API: "https://tablet-admin.winschulen.ch/wp-json/wp/v2/",
+          },
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -103,9 +111,11 @@ cfg.module.rules.push({
       // Quasar plugins
       plugins: [
         'Loading',
-        'LocalStorage'
+        'LocalStorage',
+        'SessionStorage',
+        'AppFullscreen'
       ]
-    },
+    }, 
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations

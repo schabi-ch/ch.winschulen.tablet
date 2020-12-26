@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-ma-lg">
+  <q-page class="q-pa-md" style="margin: 0 auto; max-width: 760px">
     <div v-if="article == null">laden...</div>
     <div v-else>
       <h1>{{ article.title.rendered }}</h1>
@@ -35,9 +35,7 @@ export default {
     //https://github.com/axios/axios/issues/2505
 
     const options = {
-      url:
-        "https://tablet-admin.winschulen.ch/wp-json/wp/v2/posts/" +
-        this.$route.params.id,
+      url: process.env.API + "posts/" + this.$route.params.id,
       method: "get"
     };
 
