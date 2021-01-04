@@ -1,13 +1,13 @@
 <template>
   <div>
-    <q-page class="flex flex-center">
-      <div class="">
-        <h1>1. Einführungshalbtag</h1>
+    <q-page class="flex">
+      <div class="row">
+        <div class="col"><h1>1. Einführungshalbtag</h1></div>
       </div>
-      <div>
+      <div class="row">
         <div
-          class="q-pa-md row items-start q-gutter-md"
-          @click="$router.push('/lul/dorfrundgang')"
+          class="q-pa-md col items-start q-gutter-md"
+          @click="$router.push('/kategorie/2')"
         >
           <q-card class="content-card" style="width:300px">
             <q-img src="winterthur.jpg" :ratio="16 / 9" />
@@ -65,25 +65,29 @@
           </q-card>
         </div>
       </div>
-      <h1 class="flex-break">2. Einführungshalbtag</h1>
-      <div
-        class="q-pa-md row items-start q-gutter-md"
-        @click="$router.push('/lul/dorfrundgang')"
-      >
-        <q-card class="content-card" style="width:300px">
-          <q-img src="winterthur.jpg" :ratio="16 / 9" />
-          <div class="q-pa-md">
-            <div class="col text-h6 ellipsis">
-              Dorfrundgang
-            </div>
-            <div class="text-subtitle1">
-              1. Etappe
-            </div>
-            <div class="text-caption text-grey">
-              Hake die Liste ab.
-            </div>
+      <div class="row"><h1>2. Einführungshalbtag</h1></div>
+      <div class="row">
+        <div class="col">
+          <div
+            class="q-pa-md row items-start q-gutter-md"
+            @click="$router.push('/lul/dorfrundgang')"
+          >
+            <q-card class="content-card" style="width:300px">
+              <q-img src="winterthur.jpg" :ratio="16 / 9" />
+              <div class="q-pa-md">
+                <div class="col text-h6 ellipsis">
+                  Dorfrundgang
+                </div>
+                <div class="text-subtitle1">
+                  1. Etappe
+                </div>
+                <div class="text-caption text-grey">
+                  Hake die Liste ab.
+                </div>
+              </div>
+            </q-card>
           </div>
-        </q-card>
+        </div>
       </div>
     </q-page>
   </div>

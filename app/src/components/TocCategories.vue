@@ -2,7 +2,7 @@
   <div>
     <q-list separator class="rounded-borders">
       <q-expansion-item
-        v-for="category in categoryTree"
+        v-for="category in currentCategoryTree"
         :key="category.id"
         expand-separator
         :label="category.label"
@@ -34,7 +34,7 @@
             >
             </q-expansion-item>
           </q-expansion-item>
-          <template v-else>
+          <div v-else>
             <q-item
               clickable
               v-ripple
@@ -43,7 +43,7 @@
             >
               {{ categoryLevel1.label }}
             </q-item>
-          </template>
+          </div>
           <q-separator color="secondary" />
         </div>
       </q-expansion-item>
@@ -66,11 +66,12 @@
     https://ipad-help.muwa.ch/wp-json/wp/v2/categories
     https://ipad-help.muwa.ch/wp-json/wp/v2/posts/7
     https://ipad-help.muwa.ch/wp-json/wp/v2/posts?categories=3
--->
+
     <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
       >ERROR: {{ error }}
       <pre>{{ error }}</pre>
     </q-banner>
+-->
   </div>
 </template>
 
@@ -80,12 +81,28 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "TOC",
   computed: {
-    ...mapGetters("app", ["userMode", "categoryTree", "categories"])
+    ...mapGetters("app", [
+      "userMode",
+      "categoryTree",
+      "categories",
+      "categoriesLuL",
+      "categoriesSuS"
+    ]),
+    currentCategoryTree: function() {
+      if (this.userMode == "lul") {
+        return this.categoriesLuL.children;
+      } else if (this.userMode == "sus") {
+        return this.categoriesSuS.children;
+      } else {
+        return null;
+      }
+    }
   },
   data() {
     return {
       selected: null,
       error: null
+      //currentCategoryTree: null
     };
   },
   methods: {
@@ -96,13 +113,20 @@ export default {
     ]),
     displayCategory(node) {
       var category = this.categories.find(i => i.id == node);
-      console.log("click tree", category);
+      console.log("click tree", node);
       this.setCurrentCategory(category);
       this.$router.push(`/kategorie/${node}`);
     },
     switchUserMode() {
       this.setUserMode(this.userModeSwitcher);
-      this.$router.push(`/${this.userModeSwitcher}`);
+      //this.$router.push(`/${this.userModeSwitcher}`);
+      /*
+      if (this.userMode == "lul") {
+        this.currentCategoryTree = this.categoriesLuL.children;
+      } else if (this.userMode == "sus") {
+        this.currentCategoryTree = this.categoriesSuS.children;
+      }
+      */
     },
     openBackend() {
       window.open("https://tablet-admin.winschulen.ch/wp-admin", "_blank");
@@ -113,7 +137,15 @@ export default {
       this.setUserMode(this.$q.localStorage.getItem("userMode"));
       this.userModeSwitcher = this.userMode;
     }
+    /*
+    if (this.userMode == "lul") {
+      this.currentCategoryTree = this.categoriesLuL.children;
+    } else if (this.userMode == "sus") {
+      this.currentCategoryTree = this.categoriesSuS.children;
+    }
+    console.log(this.currentCategoryTree);
     //this.getCategories();
+  */
   }
 };
 </script>

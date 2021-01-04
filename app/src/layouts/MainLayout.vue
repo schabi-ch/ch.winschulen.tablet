@@ -18,19 +18,7 @@
           @click="$router.push({ name: 'home' })"
           class="q-mr-md"
         ></q-btn>
-        <q-input
-          rounded
-          outlined
-          dense
-          v-model="searchInput"
-          color="primary"
-          bg-color="grey-2"
-          @keyup.enter="searchArticle"
-        >
-          <template v-slot:append>
-            <q-btn icon="search" round flat @click="searchArticle" />
-          </template>
-        </q-input>
+        <search-field />
         <q-btn
           flat
           stretch
@@ -50,7 +38,7 @@
               <q-separator />
               <q-item>
                 <q-item-section class="font-xs"
-                  >Version 0.1<br />24.12.2020</q-item-section
+                  >Version 0.2<br />04.01.2021</q-item-section
                 >
               </q-item>
             </q-list>
@@ -94,18 +82,18 @@
 import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 import TocCategories from "components/TocCategories.vue";
+import SearchField from "components/SearchField.vue";
 
 export default {
   name: "MainLayout",
-  components: { TocCategories },
+  components: { TocCategories, SearchField },
   computed: {
     ...mapGetters("app", ["userMode", "previousRoute"])
   },
   data() {
     return {
       leftDrawerOpen: false,
-      userModeSwitcher: null,
-      searchInput: ""
+      userModeSwitcher: null
     };
   },
   methods: {
@@ -120,12 +108,6 @@ export default {
     goBack() {
       console.log("go back", this.previousRoute);
       this.$router.go(-1);
-    },
-    async searchArticle() {
-      this.search(this.searchInput);
-      this.$router.push({
-        name: "search"
-      });
     }
   },
   created() {
