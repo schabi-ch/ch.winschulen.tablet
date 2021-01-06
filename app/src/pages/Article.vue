@@ -1,35 +1,76 @@
 <template>
-  <q-page class="q-pa-md" style="margin: 0 auto; max-width: 760px">
-    <div v-if="article == null">laden...</div>
-    <div v-else>
-      <h1>{{ article.title.rendered }}</h1>
-      <div v-html="article.content.rendered"></div>
-    </div>
+  <q-page
+    class="q-pa-md"
+    style="margin: 0 auto; max-width: 760px"
+    v-if="!initLoading"
+  >
+    <h1>{{ article.title }}</h1>
+    <div v-html="article.content"></div>
+
     <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
       >ERROR: {{ error }}
       <pre>{{ error }}</pre>
     </q-banner>
-    <q-list bordered class="rounded-borders">
-      <q-expansion-item expand-separator label="Development Infos">
-        <pre>{{ article }}</pre>
-      </q-expansion-item>
-    </q-list>
+
+    <div class="text-white bg-secondary row q-pa-md justify-center">
+      <q-btn
+        outline
+        :label="setTaskDoneLabel"
+        stretch
+        @click="toggleTaskDone"
+        class="q-mr-md"
+      ></q-btn>
+    </div>
   </q-page>
 </template>
 
 <script>
 import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters("app", ["initLoading", "articles"]),
+    article: function() {
+      return this.articles.find(i => i.id == this.articleId);
+    },
+    icon: function() {
+      if (this.article != null && this.article.done) {
+        //return "check_circle_outline";
+        return "check";
+      } else {
+        return ""; //"adjust";
+      }
+    },
+    setTaskDoneLabel: function() {
+      if (this.article != null && this.article.done) {
+        return "als ungelesen markieren";
+      } else {
+        return "als gelesen markieren";
+      }
+    }
+  },
   data() {
     return {
-      loading: true,
-      article: null,
+      loading: false,
+      articleId: null,
       response: false,
       error: null
     };
   },
+  methods: {
+    ...mapActions("app", ["setTaskDone"]),
+    toggleTaskDone() {
+      this.setTaskDone({
+        id: this.article.id,
+        value: !this.article.done
+      });
+    }
+  },
   async created() {
+    this.articleId = this.$route.params.id;
+    console.l;
+    /*
     this.$q.loading.show({ message: "Inhalt wird geladen..." });
     //this.$route.params.id
     //https://github.com/axios/axios/issues/2505
@@ -61,9 +102,10 @@ export default {
         this.error = error;
         console.log("error", error);
       });
-     */
+    
 
     this.$q.loading.hide();
+ */
   }
 };
 </script>

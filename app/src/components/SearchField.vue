@@ -6,6 +6,8 @@
     v-model="searchInput"
     color="primary"
     bg-color="grey-2"
+    class="searchField"
+    input-style="font-size: 12px;"
     @keyup.enter="searchArticle"
   >
     <template v-slot:append>
@@ -35,4 +37,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.searchField .q-field__control,
+.searchField .q-field__append {
+  height: 30px !important;
+}
+</style>

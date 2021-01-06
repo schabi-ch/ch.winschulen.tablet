@@ -2,6 +2,7 @@ import { LocalStorage, SessionStorage, Loading } from "quasar";
 import axios from "axios";
 
 const state = {
+  initLoading: true,
   routerHistory: [],
   userMode: null,
   tasksDone: [],
@@ -16,6 +17,9 @@ const state = {
 };
 
 const mutations = {
+  setInitLoading(state, payload) {
+    state.initLoading = payload;
+  },
   setUserMode(state, user) {
     state.userMode = user;
     LocalStorage.set("userMode", user);
@@ -65,7 +69,6 @@ const mutations = {
         axios
           .get(process.env.API + "posts?categories=" + state.currentCategory.id)
           .then(response => {
-            console.log("articles", response.data);
             var articles = [];
 
             //response.data.sort((a,b) => (a.description > b.description) ? 1 : ((b.description > a.description) ? -1 : 0));
@@ -112,6 +115,9 @@ const mutations = {
       state.tasksDone.splice(index, 1);
     }
     LocalStorage.set("tasksDone", state.tasksDone);
+
+    var index = state.articles.findIndex(q => q.id == payload.id);
+    state.articles[index].done = payload.value;
   }
 };
 
@@ -139,6 +145,12 @@ const actions = {
           };
           articles.push(article);
         });
+        // articles, order articles by date ascending
+        articles.sort((a, b) =>
+          a.date > b.date ? 1 : b.date > a.date ? -1 : 0
+        );
+        commit("setArticles", articles);
+        console.log("articles", articles);
       })
       .catch(error => {
         this.error = error;
@@ -185,8 +197,9 @@ const actions = {
       "setCategoriesLuL",
       categoryTree.find(q => q.label == "Ansicht LPs")
     );
-    commit("setCategories", categories);
-    commit("setArticles", articles);
+    await commit("setCategories", categories);
+
+    commit("setInitLoading", false);
   },
   setUserMode({ commit }, payload) {
     commit("setUserMode", payload);
@@ -283,7 +296,6 @@ function buildTree(node, data, categories, articles) {
     node.children = [];
     nextLayer.forEach(n => {
       var newNode = { id: n.id, label: n.name };
-      // articles, order articles by date ascending
       var articlesForCategory = articles.filter(f =>
         f.categories.includes(n.id)
       );
@@ -297,6 +309,12 @@ function buildTree(node, data, categories, articles) {
 }
 
 const getters = {
+  initLoading: state => {
+    return state.initLoading;
+  },
+  articles: state => {
+    return state.articles;
+  },
   previousRoute: state => {
     const historyLen = state.routerHistory.length;
     if (historyLen == 0) return null;

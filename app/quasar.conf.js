@@ -10,7 +10,7 @@
 module.exports = function(ctx) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
-    supportTS: false,
+    supportTS: true,
 
     // https://quasar.dev/quasar-cli/prefetch-feature
     // preFetch: true,
@@ -86,7 +86,7 @@ module.exports = function(ctx) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: "material-icons", // Quasar icon set
-      lang: "en-us", // Quasar language pack
+      lang: "de", // Quasar language pack
       config: {},
 
       // Possible values for "importStrategy":
@@ -102,7 +102,13 @@ module.exports = function(ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Loading", "LocalStorage", "SessionStorage", "AppFullscreen"]
+      plugins: [
+        "Loading",
+        "Notify",
+        "LocalStorage",
+        "SessionStorage",
+        "AppFullscreen"
+      ]
     },
 
     // animations: 'all', // --- includes all animations
@@ -174,7 +180,8 @@ module.exports = function(ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
     capacitor: {
-      hideSplashscreen: true
+      hideSplashscreen: true,
+      iosStatusBarPadding: true
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron

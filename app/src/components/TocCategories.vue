@@ -7,7 +7,7 @@
         expand-separator
         :label="category.label"
         group="level1"
-        header-class="bg-secondary text-white"
+        header-class="first-level"
         expand-icon-class="text-white"
       >
         <div
@@ -38,7 +38,7 @@
             <q-item
               clickable
               v-ripple
-              class="bg-teal-2"
+              class="second-level"
               @click="displayCategory(categoryLevel1.id)"
             >
               {{ categoryLevel1.label }}
@@ -150,4 +150,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.first-level {
+  color: #fff;
+  background-color: $secondary;
+}
+.second-level {
+  background-color: $light;
+}
+</style>

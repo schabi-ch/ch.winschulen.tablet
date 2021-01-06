@@ -38,7 +38,7 @@
               <q-separator />
               <q-item>
                 <q-item-section class="font-xs"
-                  >Version 0.2<br />04.01.2021</q-item-section
+                  >Version 0.1.build7<br />06.01.2021</q-item-section
                 >
               </q-item>
             </q-list>
@@ -49,9 +49,9 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
       bordered
       side="left"
+      overlay
       content-class="bg-grey-1"
     >
       <toc-categories />

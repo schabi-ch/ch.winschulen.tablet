@@ -19,7 +19,7 @@ export default function({ store }) {
     scrollBehavior(to, from, savedPosition) {
       const fromHistory = Boolean(savedPosition);
       if (fromHistory && store.state.app.routerHistory.length > 0) {
-        store.dispatch("app/removeRouteToHistory");
+        store.dispatch("app/removeRouteFromHistory");
       } else {
         if (from.name != "home") {
           store.dispatch("app/addRouteToHistory", from);

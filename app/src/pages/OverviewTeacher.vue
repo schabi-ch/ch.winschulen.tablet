@@ -1,92 +1,29 @@
 <template>
   <div>
-    <q-page class="flex">
-      <div class="row">
-        <div class="col"><h1>1. Einführungshalbtag</h1></div>
+    <q-page class="page">
+      <div class="orientation-portrait absolute-center text-center">
+        <q-icon name="screen_rotation" size="xl" class="q-pa-lg"></q-icon>
+        <p>Bitte drehe das Tablet, umd die Karte anzuzeigen.</p>
       </div>
-      <div class="row">
-        <div
-          class="q-pa-md col items-start q-gutter-md"
-          @click="$router.push('/kategorie/2')"
-        >
-          <q-card class="content-card" style="width:300px">
-            <q-img src="winterthur.jpg" :ratio="16 / 9" />
-            <div class="q-pa-md">
-              <div class="col text-h6 ellipsis">
-                Dorfrundgang
-              </div>
-              <div class="text-subtitle1">
-                1. Etappe
-              </div>
-              <div class="text-caption text-grey">
-                Hake die Liste ab.
-              </div>
-            </div>
-          </q-card>
+      <div class="orientation-landscape">
+        <div v-if="initLoading" class=" absolute-center text-center">
+          <q-icon name="online_prediction" size="xl" class="q-pa-lg"></q-icon>
+          <p>Inhalt wird geladen, bitte kurz warten...</p>
         </div>
-
-        <div
-          @click="$router.push('/artikel/7')"
-          class="q-pa-md row items-start q-gutter-md"
-        >
-          <q-card class="content-card" style="width:300px">
-            <q-img src="winterthur.jpg" :ratio="16 / 9" />
-            <div class="q-pa-md">
-              <div class="col text-h6 ellipsis">
-                Wanderkarte
-              </div>
-              <div class="text-subtitle1">
-                Einführung, 1. Halbtag
-              </div>
-              <div class="text-caption text-grey">
-                Viel Spass.
-              </div>
-            </div>
-          </q-card>
-        </div>
-
-        <div
-          @click="$router.push('/artikel/7')"
-          class="q-pa-md row items-start q-gutter-md"
-        >
-          <q-card class="content-card" style="width:300px">
-            <q-img src="winterthur.jpg" :ratio="16 / 9" />
-            <div class="q-pa-md">
-              <div class="col text-h6 ellipsis">
-                Artikel ID 7
-              </div>
-              <div class="text-subtitle1">
-                Test
-              </div>
-              <div class="text-caption text-grey">
-                Viel Spass.
-              </div>
-            </div>
-          </q-card>
-        </div>
-      </div>
-      <div class="row"><h1>2. Einführungshalbtag</h1></div>
-      <div class="row">
-        <div class="col">
-          <div
-            class="q-pa-md row items-start q-gutter-md"
-            @click="$router.push('/lul/dorfrundgang')"
-          >
-            <q-card class="content-card" style="width:300px">
-              <q-img src="winterthur.jpg" :ratio="16 / 9" />
-              <div class="q-pa-md">
-                <div class="col text-h6 ellipsis">
-                  Dorfrundgang
-                </div>
-                <div class="text-subtitle1">
-                  1. Etappe
-                </div>
-                <div class="text-caption text-grey">
-                  Hake die Liste ab.
-                </div>
-              </div>
-            </q-card>
-          </div>
+        <div v-else>
+          <img src="Wanderkarte.jpeg" class="map" />
+          <map-point :articleId="9" style="top:133px;left:207px" />
+          <map-point :articleId="12" style="top:163px;left:182px" />
+          <map-point :articleId="29" style="top:193px;left:197px" />
+          <q-btn
+            style="top:100px;left:1000px"
+            round
+            dense
+            color="red"
+            size="sm"
+            icon="check_circle_outline"
+            class="station"
+          />
         </div>
       </div>
     </q-page>
@@ -95,22 +32,31 @@
 
 <script>
 import { LocalStorage } from "quasar";
+import MapPoint from "src/components/MapPoint.vue";
+import { mapGetters } from "vuex";
 
 export default {
+  components: { MapPoint },
+  computed: {
+    ...mapGetters("app", ["initLoading"])
+  },
   data() {
-    return {
-      test: this.$q.localStorage.getItem("test")
-    };
+    return {};
   },
-  methods: {
-    gotoChecklist() {},
-    addTest() {
-      this.$q.localStorage.set("test", "hallo welt" + Date.now());
-      this.test = this.$q.localStorage.getItem("test");
-    }
-  },
+
   created() {}
 };
 </script>
 
-<style></style>
+<style>
+.page {
+  width: 1024px;
+  height: calc(100vh - 50px);
+  overflow: hidden;
+  margin: 0 auto;
+}
+.map {
+  width: 100%;
+  height: auto;
+}
+</style>
