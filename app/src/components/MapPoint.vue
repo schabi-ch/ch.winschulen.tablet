@@ -1,11 +1,10 @@
 <template>
   <q-btn
     round
+    flat
     dense
     :icon="icon"
-    :flat="!article.done"
-    color="secondary"
-    size="xs"
+    size="md"
     class="station"
     @click="showDetails()"
   />
@@ -24,10 +23,9 @@ export default {
     },
     icon: function() {
       if (this.article != null && this.article.done) {
-        //return "check_circle_outline";
-        return "check";
+        return "img:done.png";
       } else {
-        return ""; //"adjust";
+        return "img:open.png";
       }
     },
     setTaskDoneLabel: function() {
