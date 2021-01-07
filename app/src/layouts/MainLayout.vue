@@ -38,7 +38,7 @@
               <q-separator />
               <q-item>
                 <q-item-section class="font-xs"
-                  >Version 0.1.build7<br />06.01.2021</q-item-section
+                  >Version 0.1<br />Build 8<br />07.01.2021</q-item-section
                 >
               </q-item>
             </q-list>
