@@ -35,6 +35,9 @@
               <q-item clickable @click="openBackend">
                 <q-item-section>Backend</q-item-section>
               </q-item>
+              <q-item clickable @click="$router.push('/datenschutz')">
+                <q-item-section>Datenschutzerklärung</q-item-section>
+              </q-item>
               <q-separator />
               <q-item>
                 <q-item-section class="font-xs"

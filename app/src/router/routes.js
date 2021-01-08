@@ -29,6 +29,10 @@ const routes = [
         path: "/suche",
         name: "search",
         component: () => import("pages/Search.vue")
+      },
+      {
+        path: "/datenschutz",
+        component: () => import("pages/PrivacyPolicy.vue")
       }
     ]
   },
