@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
-      <q-toolbar style="padding:0">
+      <q-toolbar style="padding: auto 0">
         <q-btn
           flat
           stretch
@@ -75,6 +75,9 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <q-page-sticky position="bottom-left" :offset="[18, 18]">
+            <q-btn @click="leftDrawerOpen = !leftDrawerOpen" round color="accent" icon="toc" />
+          </q-page-sticky>
   </q-layout>
 </template>
 

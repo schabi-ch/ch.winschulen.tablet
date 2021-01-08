@@ -12,7 +12,8 @@
       <pre>{{ error }}</pre>
     </q-banner>
 
-    <div class="text-white bg-secondary row q-pa-md justify-center">
+
+    <div class="text-white bg-secondary row q-pa-md q-mt-lg justify-center">
       <q-btn
         outline
         :label="setTaskDoneLabel"
