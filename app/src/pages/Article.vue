@@ -4,22 +4,27 @@
     style="margin: 0 auto; max-width: 760px"
     v-if="!initLoading"
   >
-    <h1>{{ article.title }}</h1>
-    <div v-html="article.content"></div>
+    <div v-if="loading">lade Inhalt...</div>
+    <div v-else>
+      <h1>{{ article.title }}</h1>
+      <div v-html="articleContent"></div>
 
-    <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
-      >ERROR: {{ error }}
-      <pre>{{ error }}</pre>
-    </q-banner>
+      <q-banner class="text-white bg-orange q-ma-lg" rounded v-if="error"
+        >ERROR: {{ error }}
+        <pre>{{ error }}</pre>
+      </q-banner>
 
-    <div class="text-white bg-secondary row q-pa-md justify-center">
-      <q-btn
-        outline
-        :label="setTaskDoneLabel"
-        stretch
-        @click="toggleTaskDone"
-        class="q-mr-md"
-      ></q-btn>
+      <div class="text-white bg-secondary row q-pa-md justify-center">
+        <q-btn
+          outline
+          :label="setTaskDoneLabel"
+          stretch
+          @click="toggleTaskDone"
+          class="q-mr-md"
+        ></q-btn>
+      </div>
+
+      <q-btn label="youtube test" @click="youtubeChanger"></q-btn>
     </div>
   </q-page>
 </template>
@@ -27,6 +32,8 @@
 <script>
 import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
+import YoutubeVideo from "components/YouTubeVideo";
+import Vue from "vue";
 
 export default {
   computed: {
@@ -54,6 +61,7 @@ export default {
     return {
       loading: false,
       articleId: null,
+      articleContent: "",
       response: false,
       error: null
     };
@@ -65,11 +73,36 @@ export default {
         id: this.article.id,
         value: !this.article.done
       });
+    },
+    youtubeChanger() {
+      console.log("click");
+
+      ///var youtubeLinks = /(\[\[youtube:)(.*?)(\]\])/
+
+      ///var newstr = article.content.replace(/xmas/i, "Christmas");
+
+      this.article.content.replace(/(\[\[youtube:)(.*?)(\]\])/g, function(
+        match
+      ) {
+        // Change only the 2nd matched string.
+        console.log(match);
+
+        //return ++nth == 2 ? "newValue" : match;
+      });
+
+      //var x = document.getElementById("myVar");
+
+      /*
+      var ComponentClass = Vue.extend(YoutubeVideo);
+      var instance = new ComponentClass({
+        propsData: { url: "test" }
+      });
+      instance.$mount(); // pass nothing
+      this.$refs.container.appendChild(instance.$el);
+      */
     }
   },
   async created() {
-    this.articleId = this.$route.params.id;
-    console.l;
     /*
     this.$q.loading.show({ message: "Inhalt wird geladen..." });
     //this.$route.params.id
@@ -102,10 +135,28 @@ export default {
         this.error = error;
         console.log("error", error);
       });
-    
+
 
     this.$q.loading.hide();
  */
+  },
+  beforeMount() {
+    this.loading = true;
+    this.articleId = this.$route.params.id;
+
+    // transform youtube links
+    this.articleContent = this.article.content.replace(
+      /(\[\[youtube:)(.*?)(\]\])/g,
+      function(match) {
+        // Change only the 2nd matched string.
+        console.log(match);
+        return "XX";
+      }
+    );
+
+    this.loading = false;
+
+    // https://css-tricks.com/creating-vue-js-component-instances-programmatically/
   }
 };
 </script>

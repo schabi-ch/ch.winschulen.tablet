@@ -11,7 +11,7 @@
           <p>Inhalt wird geladen, bitte kurz warten...</p>
         </div>
         <div v-else class="map-frame">
-          <img src="Wanderkarte.png" class="map" />
+          <img src="Wanderkarte.jpg" class="map" />
           <!-- Dorfrundgang top=Y, left=X -->
           <map-point :articleId="9" style="top:146px;left:227px" />
           <map-point :articleId="12" style="top:177px;left:187px" />
