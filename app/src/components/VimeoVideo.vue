@@ -1,6 +1,9 @@
 <template>
-  <div :id="`component-${url}`">
+  <div :id="`vimeoComponent-${url}`">
     <div class="q-video q-video--responsive" style="padding-bottom: 56.25%;">
+      <vimeo-player ref="player" :video-id="videoID" @ready="onReady" />
+
+      <!--
       <youtube
         :video-id="url"
         ref="youtube"
@@ -8,6 +11,7 @@
         @paused="paused"
         :player-vars="playerVars"
       ></youtube>
+      -->
     </div>
     <div
       class="q-pt-sm q-mb-md q-gutter-md"
@@ -54,15 +58,15 @@
 
 <script>
 /*
-YouTube API Documentation: https://developers.google.com/youtube/iframe_api_reference
-VueJS-YouTube Api Wrapper: https://www.npmjs.com/package/vue-youtube
+Vimeo API Documentation: 
+VueJS-Vimeo Api Wrapper: https://www.npmjs.com/package/vue-vimeo-player
 */
 export default {
-  name: "YoutubeVideo",
+  name: "VimeoVideo",
   props: ["url"],
   computed: {
     player() {
-      return this.$refs.youtube.player;
+      return this.$refs.vimeo.player;
     },
     playIcon() {
       if (this.play) {
@@ -79,8 +83,10 @@ export default {
   },
   data() {
     return {
+      videoID: "500726329",
       speed: 1,
       play: false,
+      playerReady: false,
       playerVars: {
         //autoplay: 1
       }
@@ -89,7 +95,7 @@ export default {
   methods: {
     toggle(e) {
       //const target = e.target.parentNode.parentNode.parentNode;
-      const target = document.getElementById("component-" + this.url);
+      const target = document.getElementById("vimeoComponent-" + this.url);
 
       this.$q.fullscreen
         .toggle(target)
@@ -102,6 +108,17 @@ export default {
           // console.error(err)
         });
     },
+    onReady() {
+      this.playerReady = true;
+    },
+    /*
+    play() {
+      this.$refs.player.play();
+    },
+    pause() {
+      this.$refs.player.pause();
+    },
+*/
     playVideo() {
       if (this.play) {
         this.player.pauseVideo();

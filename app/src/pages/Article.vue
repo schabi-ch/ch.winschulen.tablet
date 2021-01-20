@@ -14,7 +14,10 @@
         <pre>{{ error }}</pre>
       </q-banner>
 
-      <div class="text-white bg-secondary row q-pa-md justify-center">
+      <div
+        class="text-white bg-secondary row q-pa-md justify-center"
+        style="margin-top: 50px"
+      >
         <q-btn
           outline
           :label="setTaskDoneLabel"
@@ -23,8 +26,6 @@
           class="q-mr-md"
         ></q-btn>
       </div>
-
-      <q-btn label="youtube test" @click="youtubeChanger"></q-btn>
     </div>
   </q-page>
 </template>
@@ -33,6 +34,7 @@
 import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 import YoutubeVideo from "components/YouTubeVideo";
+import VimeoVideo from "components/VimeoVideo";
 import Vue from "vue";
 
 export default {
@@ -63,7 +65,9 @@ export default {
       articleId: null,
       articleContent: "",
       response: false,
-      error: null
+      error: null,
+      videosYoutube: [],
+      videosVimeo: []
     };
   },
   methods: {
@@ -73,33 +77,6 @@ export default {
         id: this.article.id,
         value: !this.article.done
       });
-    },
-    youtubeChanger() {
-      console.log("click");
-
-      ///var youtubeLinks = /(\[\[youtube:)(.*?)(\]\])/
-
-      ///var newstr = article.content.replace(/xmas/i, "Christmas");
-
-      this.article.content.replace(/(\[\[youtube:)(.*?)(\]\])/g, function(
-        match
-      ) {
-        // Change only the 2nd matched string.
-        console.log(match);
-
-        //return ++nth == 2 ? "newValue" : match;
-      });
-
-      //var x = document.getElementById("myVar");
-
-      /*
-      var ComponentClass = Vue.extend(YoutubeVideo);
-      var instance = new ComponentClass({
-        propsData: { url: "test" }
-      });
-      instance.$mount(); // pass nothing
-      this.$refs.container.appendChild(instance.$el);
-      */
     }
   },
   async created() {
@@ -140,23 +117,64 @@ export default {
     this.$q.loading.hide();
  */
   },
-  beforeMount() {
+  async beforeMount() {
     this.loading = true;
     this.articleId = this.$route.params.id;
 
+    console.log("created in article", this.articles);
+    this.articleContent = await this.article.content;
+
     // transform youtube links
+    //<div class="youtube" id="ho30rpZ20ro" ref="youtube-ho30rpZ20ro"></div>
+    var url = "";
     this.articleContent = this.article.content.replace(
       /(\[\[youtube:)(.*?)(\]\])/g,
-      function(match) {
-        // Change only the 2nd matched string.
-        console.log(match);
-        return "XX";
+      match => {
+        url = match.slice(10, -2);
+        this.videosYoutube.push({ url: url });
+        return `<div class="youtube" id="youtube-${url}"></div>`;
       }
     );
+    this.articleContent = this.articleContent.replace(
+      /(\[\[vimeo:)(.*?)(\]\])/g,
+      match => {
+        url = match.slice(8, -2);
+        this.videosVimeo.push({ url: url });
+        return `<div class="vimeo" id="vimeo-${url}" ref="vimeo-${url}"></div>`;
+      }
+    );
+
+    var YoutubeComponentClass = Vue.extend(YoutubeVideo);
+    this.videosYoutube.forEach(video => {
+      video.component = new YoutubeComponentClass({
+        propsData: { url: video.url }
+      });
+      video.component.$mount(); // pass nothing
+    });
+
+    var VimeoComponentClass = Vue.extend(VimeoVideo);
+    this.videosVimeo.forEach(video => {
+      video.component = new VimeoComponentClass({
+        propsData: { url: video.url }
+      });
+      video.component.$mount(); // pass nothing
+    });
 
     this.loading = false;
 
     // https://css-tricks.com/creating-vue-js-component-instances-programmatically/
+  },
+  updated() {
+    this.videosYoutube.forEach(video => {
+      var container = document.getElementById("youtube-" + video.url);
+      container.appendChild(video.component.$el);
+    });
+
+    this.videosVimeo.forEach(video => {
+      var container = document.getElementById("vimeo-" + video.url);
+      container.appendChild(video.component.$el);
+    });
+    console.log("vimeo", this.videosVimeo);
   }
 };
 </script>

@@ -18,7 +18,7 @@ module.exports = function(ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-    boot: ["axios"],
+    boot: ["axios", "vue-youtube", "vue-vimeo"],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ["app.scss", "wp-block-library.scss", "generate-press.scss"],
@@ -89,7 +89,7 @@ module.exports = function(ctx) {
       lang: "de", // Quasar language pack
       config: {
         capacitor: {
-        iosStatusBarPadding: true
+          iosStatusBarPadding: true
         }
       },
 

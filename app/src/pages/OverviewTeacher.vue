@@ -11,7 +11,16 @@
           <p>Inhalt wird geladen, bitte kurz warten...</p>
         </div>
         <div v-else class="map-frame">
-          <img src="Wanderkarte.jpg" class="map" />
+          <img src="Wanderkarte.jpg" class="map" usemap="#wanderkarte" />
+
+          <map name="wanderkarte">
+            <area
+              shape="poly"
+              class="pointer"
+              coords="366,550,396,480,330,456,253,459,258,541"
+              @click="$router.push('/artikel/104')"
+            />
+          </map>
           <!-- Dorfrundgang top=Y, left=X -->
           <map-point :articleId="9" style="top:146px;left:227px" />
           <map-point :articleId="12" style="top:177px;left:187px" />

@@ -9,6 +9,7 @@
         group="level1"
         header-class="first-level"
         expand-icon-class="text-white"
+        :default-opened="true"
       >
         <div
           v-for="categoryLevel1 in category.children"
