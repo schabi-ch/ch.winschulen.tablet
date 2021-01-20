@@ -87,7 +87,11 @@ module.exports = function(ctx) {
     framework: {
       iconSet: "material-icons", // Quasar icon set
       lang: "de", // Quasar language pack
-      config: {},
+      config: {
+        capacitor: {
+        iosStatusBarPadding: true
+        }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -180,8 +184,7 @@ module.exports = function(ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
     capacitor: {
-      hideSplashscreen: true,
-      iosStatusBarPadding: true
+      hideSplashscreen: true
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron

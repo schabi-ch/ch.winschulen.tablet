@@ -6,7 +6,7 @@
   "webDir": "www",
   "server": {
     "allowNavigation": [
-      "https://ipad-help.muwa.ch/"
+      "https://tablet-admin.winschulen.ch/"
     ]
   }
 }
