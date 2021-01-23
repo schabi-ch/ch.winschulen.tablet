@@ -14,7 +14,7 @@
         <q-btn
           flat
           stretch
-          icon="home"
+          icon="map"
           @click="$router.push({ name: 'home' })"
           class="q-mr-md"
         ></q-btn>
@@ -28,7 +28,14 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
         <q-space />
-
+        <q-btn
+          flat
+          stretch
+          icon="bookmark_border"
+          class="q-ml-md"
+          aria-label="Gespeicherte Artikel"
+          @click="$router.push({ name: 'myArticles' })"
+        />
         <q-btn flat stretch icon="more_horiz">
           <q-menu>
             <q-list style="min-width: 100px">
@@ -79,8 +86,13 @@
       <router-view />
     </q-page-container>
     <q-page-sticky position="bottom-left" :offset="[18, 18]">
-            <q-btn @click="leftDrawerOpen = !leftDrawerOpen" round color="accent" icon="toc" />
-          </q-page-sticky>
+      <q-btn
+        @click="leftDrawerOpen = !leftDrawerOpen"
+        round
+        color="accent"
+        icon="toc"
+      />
+    </q-page-sticky>
   </q-layout>
 </template>
 

@@ -24,7 +24,11 @@ const routes = [
         name: "category",
         component: () => import("pages/Category.vue")
       },
-      { path: "/tests", component: () => import("pages/Tests.vue") },
+      {
+        path: "/meine-artikel",
+        name: "myArticles",
+        component: () => import("pages/MyArticles.vue")
+      },
       {
         path: "/suche",
         name: "search",

@@ -12,6 +12,7 @@ const state = {
   categoriesLuL: [],
   currentCategory: null,
   articles: [],
+  savedArticles: [],
   searchResults: null,
   searchString: ""
 };
@@ -23,7 +24,14 @@ const mutations = {
   setUserMode(state, user) {
     state.userMode = user;
     LocalStorage.set("userMode", user);
-    console.log("setUserMode");
+  },
+  setSavedArticles(state, articles) {
+    if (!articles) {
+      state.savedArticles = [];
+    } else {
+      state.savedArticles = articles;
+    }
+    LocalStorage.set("savedArticles", state.savedArticles);
   },
   addRouteToHistory(state, route) {
     state.routerHistory.push(route);
@@ -150,7 +158,6 @@ const actions = {
           a.date > b.date ? 1 : b.date > a.date ? -1 : 0
         );
         commit("setArticles", articles);
-        console.log("articles", articles);
       })
       .catch(error => {
         this.error = error;
@@ -215,6 +222,15 @@ const actions = {
       commit("setAllTasksDone", LocalStorage.getItem("tasksDone"));
     }
     return state.tasksDone;
+  },
+  setSavedArticles(context, payload) {
+    context.commit("setSavedArticles", payload);
+  },
+  async getSavedArticles({ commit }) {
+    if (state.savedArticles.length == 0 && LocalStorage.has("savedArticles")) {
+      await commit("setSavedArticles", LocalStorage.getItem("savedArticles"));
+    }
+    return state.savedArticles;
   },
   async getCategories({ commit }) {
     if (state.categories.length == 0 && SessionStorage.has("categories")) {
@@ -346,6 +362,9 @@ const getters = {
   },
   searchString: state => {
     return state.searchString;
+  },
+  savedArticles: state => {
+    return state.savedArticles;
   }
 };
 

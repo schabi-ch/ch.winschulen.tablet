@@ -25,6 +25,12 @@ h1 {
   cursor: pointer;
 }
 
+.video-wrapper {
+  position: relative;
+  max-width: calc((100vh - 55px) * 16 / 9);
+  margin: 0 auto;
+}
+
 .wp-block-embed-youtube,
 .wp-block-embed-vimeo {
   max-width: 700px;

@@ -1,52 +1,63 @@
 <template>
-  <div :id="`component-${url}`">
-    <div class="q-video q-video--responsive" style="padding-bottom: 56.25%;">
-      <youtube
-        :video-id="url"
-        ref="youtube"
-        @playing="playing"
-        @paused="paused"
-        :player-vars="playerVars"
-      ></youtube>
-    </div>
+  <div :style="playerWindow">
     <div
-      class="q-pt-sm q-mb-md q-gutter-md"
-      style="display: flex; align-items: center"
-    >
-      <div>
-        <q-btn color="secondary" no-caps @click="playVideo" :icon="playIcon" />
+      @click="fullscreen = false"
+      style="z-index:-1; position: absolute; width: 100%; height: 100%"
+    ></div>
+    <div class="video-wrapper" :id="`component-${url}`">
+      <div class="q-video q-video--responsive" style="padding-bottom: 56.25%;">
+        <youtube
+          :video-id="url"
+          ref="youtube"
+          @playing="playing"
+          @paused="paused"
+          :player-vars="playerVars"
+        ></youtube>
       </div>
-
       <div
-        class="row q-gutter-md"
-        style="align-items: center; margin-top: -2px"
+        class="q-pt-sm q-mb-md q-gutter-md"
+        style="display: flex; align-items: center"
       >
-        <div style="font-size: 12px">
-          Geschwindigkeit:
-        </div>
-        <div style="width: 100px">
-          <q-slider
-            v-model="speed"
-            :min="0.5"
-            :max="2"
-            :step="0.25"
-            snap
-            dense
-            label
+        <div>
+          <q-btn
             color="secondary"
+            no-caps
+            @click="playVideo"
+            :icon="playIcon"
           />
         </div>
-      </div>
 
-      <q-space />
-      <div>
-        <q-btn
-          color="secondary"
-          no-caps
-          @click="toggle"
-          :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-          :label="$q.fullscreen.isActive ? 'Verkleinern' : 'Vollbild'"
-        />
+        <div
+          class="row q-gutter-md"
+          style="align-items: center; margin-top: -2px"
+        >
+          <div style="font-size: 12px">
+            Geschwindigkeit:
+          </div>
+          <div style="width: 100px">
+            <q-slider
+              v-model="speed"
+              :min="0.5"
+              :max="2"
+              :step="0.25"
+              snap
+              dense
+              label
+              color="secondary"
+            />
+          </div>
+        </div>
+
+        <q-space />
+        <div>
+          <q-btn
+            color="secondary"
+            no-caps
+            @click="toggle"
+            :icon="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
+            :label="fullscreen ? 'Verkleinern' : 'Vollbild'"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -61,6 +72,21 @@ export default {
   name: "YoutubeVideo",
   props: ["url"],
   computed: {
+    playerWindow() {
+      if (this.fullscreen) {
+        return `
+          position: fixed;
+          background-color: #ccc;
+          top: 0px;
+          left: 0px;
+          z-index: 9999999;
+          width: 100%;
+          height: 100%;
+        `;
+      } else {
+        return "";
+      }
+    },
     player() {
       return this.$refs.youtube.player;
     },
@@ -81,26 +107,17 @@ export default {
     return {
       speed: 1,
       play: false,
+      fullscreen: false,
       playerVars: {
         //autoplay: 1
+        //controls: 0
+        showinfo: 0
       }
     };
   },
   methods: {
-    toggle(e) {
-      //const target = e.target.parentNode.parentNode.parentNode;
-      const target = document.getElementById("component-" + this.url);
-
-      this.$q.fullscreen
-        .toggle(target)
-        .then(() => {
-          // success!
-        })
-        .catch(err => {
-          alert(err);
-          // uh, oh, error!!
-          // console.error(err)
-        });
+    toggle() {
+      this.fullscreen = !this.fullscreen;
     },
     playVideo() {
       if (this.play) {

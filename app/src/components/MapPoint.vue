@@ -14,10 +14,14 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
-    articleId: Number
+    articleId: Number,
+    categoryId: {
+      type: Number,
+      required: false
+    }
   },
   computed: {
-    ...mapGetters("app", ["articles"]),
+    ...mapGetters("app", ["articles", "categories"]),
     article: function() {
       return this.articles.find(i => i.id == this.articleId);
     },
@@ -37,7 +41,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("app", ["setTaskDone"]),
+    ...mapActions("app", ["setTaskDone", "setCurrentCategory"]),
     showDetails() {
       this.$q.notify({
         message: `<b>${this.article.title}</b>`,
@@ -59,6 +63,12 @@ export default {
             label: "Anleitung",
             color: "white",
             handler: () => {
+              if (this.categoryId != null) {
+                var category = this.categories.find(
+                  q => q.id == this.categoryId
+                );
+                this.setCurrentCategory(category);
+              }
               this.$router.push(`/artikel/${this.article.id}`);
             }
           }
