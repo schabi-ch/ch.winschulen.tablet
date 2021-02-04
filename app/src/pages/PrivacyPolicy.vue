@@ -12,7 +12,7 @@
       Christof Müller<br />Pionierstrasse 7<br />8400 Winterthur
     </p>
     <p>
-      Telefon: 052 267 55 79<br />E-Mail: schucom@win.ch<br />WebSite:
+      Telefon: 052 267 55 79<br />E-Mail: kontakt@tablet.winschulen.ch<br />WebSite:
       https://tablet.winschulen.ch/
     </p>
     <p>&nbsp;</p>

@@ -17,6 +17,7 @@
       <div
         class="q-pt-sm q-mb-md q-gutter-md"
         style="display: flex; align-items: center"
+        :class="fullscreen ? 'q-mx-md' : ''"
       >
         <div>
           <q-btn
@@ -24,6 +25,28 @@
             no-caps
             @click="playVideo"
             :icon="playIcon"
+          />
+        </div>
+
+        <div v-if="playlist.length > 0">
+          Video <b>{{ currentPlaylistVideo + 1 }}</b
+          >/{{ playlist.length }}
+
+          <q-btn
+            v-if="currentPlaylistVideo > 0"
+            color="secondary"
+            flat
+            dense
+            @click="playPreviousVideo"
+            icon="navigate_before"
+          />
+          <q-btn
+            v-if="currentPlaylistVideo < playlist.length - 1"
+            color="secondary"
+            flat
+            dense
+            @click="playNextVideo"
+            icon="navigate_next"
           />
         </div>
 
@@ -82,6 +105,7 @@ export default {
           z-index: 9999999;
           width: 100%;
           height: 100%;
+          display: flex;
         `;
       } else {
         return "";
@@ -112,7 +136,9 @@ export default {
         //autoplay: 1
         //controls: 0
         showinfo: 0
-      }
+      },
+      playlist: [],
+      currentPlaylistVideo: 0
     };
   },
   methods: {
@@ -128,12 +154,34 @@ export default {
         this.play = true;
       }
     },
+    playNextVideo() {
+      this.player.nextVideo();
+      this.currentPlaylistVideo++;
+    },
+    playPreviousVideo() {
+      this.player.previousVideo();
+      this.currentPlaylistVideo--;
+    },
     playing() {
       this.play = true;
       console.log("\o/ we are watching!!!");
     },
     paused() {
       this.play = false;
+    }
+  },
+  async mounted() {
+    if (this.url.startsWith("playlist:")) {
+      this.playerVars.listType = "playlist";
+      this.playerVars.list = this.url.replace("playlist:", "");
+      this.playlist = await this.player.getPlaylist();
+    } else if (this.url.indexOf(",") >= 0) {
+      var videoIds = [];
+      this.url.split(",").forEach(videoId => {
+        videoIds.push(videoId.trim());
+      });
+      this.player.cuePlaylist(videoIds);
+      this.playlist = videoIds;
     }
   }
 };

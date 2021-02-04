@@ -39,17 +39,15 @@
         <q-btn flat stretch icon="more_horiz">
           <q-menu>
             <q-list style="min-width: 100px">
-              <q-item clickable @click="openBackend">
-                <q-item-section>Backend</q-item-section>
+              <q-item clickable @click="$router.push('/info')">
+                <q-item-section>Info</q-item-section>
               </q-item>
               <q-item clickable @click="$router.push('/datenschutz')">
                 <q-item-section>Datenschutzerklärung</q-item-section>
               </q-item>
               <q-separator />
-              <q-item>
-                <q-item-section class="font-xs"
-                  >Version 0.1<br />Build 8<br />07.01.2021</q-item-section
-                >
+              <q-item clickable @click="openBackend">
+                <q-item-section>Backend</q-item-section>
               </q-item>
             </q-list>
           </q-menu>
