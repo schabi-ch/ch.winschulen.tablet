@@ -12,14 +12,18 @@
         </div>
         <div v-else class="map-frame">
           <img src="Wanderkarte.jpg" class="map" usemap="#wanderkarte" />
-
-          <!--  @click="$router.push('/artikel/104')"-->
           <map name="wanderkarte">
             <area
               shape="poly"
               class="pointer"
               coords="366,550,396,480,330,456,253,459,258,541"
               @click="clickHelppoint"
+            />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="172,129,218,127,230,8,152,5"
+              @click="clickFallschirm"
             />
           </map>
           <!-- Dorfrundgang top=Y, left=X -->
@@ -196,11 +200,6 @@
             :categoryId="19"
             style="top:368px;left:418px"
           />
-          <map-point
-            :articleId="141"
-            :categoryId="19"
-            style="top:326px;left:500px"
-          />
 
           <!-- Wahlprogramm: Abendspaziergang für Kreative -->
           <map-point
@@ -231,6 +230,11 @@
             style="top:376px;left:777px"
           />
           <map-point
+            :articleId="141"
+            :categoryId="19"
+            style="top:409px;left:872px"
+          />
+          <map-point
             :articleId="145"
             :categoryId="18"
             style="top:448px;left:821px"
@@ -247,19 +251,28 @@
           />
         </div>
       </div>
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-btn
+          type="a"
+          target="_blank"
+          href="https://winschulen.sharepoint.com/sites/ICTSek/Lists/Feedback%20Mein%20Tablet/AllItems.aspx"
+          round
+          color="secondary"
+          icon="feedback"
+        />
+      </q-page-sticky>
     </q-page>
   </div>
 </template>
 
 <script>
-import { LocalStorage } from "quasar";
 import MapPoint from "src/components/MapPoint.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: { MapPoint },
   computed: {
-    ...mapGetters("app", ["initLoading"])
+    ...mapGetters("app", ["initLoading", "categories"])
   },
   data() {
     return {};
@@ -267,9 +280,18 @@ export default {
   methods: {
     ...mapActions("app", ["setCurrentCategory"]),
     clickHelppoint() {
+      this.$router.push(`/artikel/104`);
+      /*
       window.open(
         "https://www.mindmeister.com/maps/public_map_shell/1266060434/ipad-troubleshooting"
       );
+      */
+    },
+    clickFallschirm() {
+      // this.$router.push(`/kategorie/25`);
+      var category = this.categories.find(i => i.id == 25);
+      this.setCurrentCategory(category);
+      this.$router.push(`/kategorie/25`);
     }
   },
   created() {

@@ -18,6 +18,17 @@ const state = {
 };
 
 const mutations = {
+  resetState(state) {
+    state.routerHistory = [];
+    (state.userMode = null), (state.tasksDone = []);
+    state.categoryTree = [];
+    state.categories = [];
+    state.categoriesSuS = [];
+    state.categoriesLuL = [];
+    (state.currentCategory = null), (state.articles = []);
+    state.savedArticles = [];
+    (state.searchResults = null), (state.searchString = "");
+  },
   setInitLoading(state, payload) {
     state.initLoading = payload;
   },
@@ -132,6 +143,7 @@ const mutations = {
 const actions = {
   async init({ commit, dispatch }) {
     console.log("init - load stuff");
+    commit("resetState");
     dispatch("getAllTasksDone");
 
     // --------------------
