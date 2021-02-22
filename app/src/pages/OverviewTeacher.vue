@@ -22,7 +22,7 @@
             <area
               shape="poly"
               class="pointer"
-              coords="172,129,218,127,230,8,152,5"
+              coords="172,129,308,115,230,8,137,5"
               @click="clickFallschirm"
             />
           </map>
@@ -124,7 +124,7 @@
           <map-point
             :articleId="89"
             :categoryId="16"
-            style="top:66px;left:780px"
+            style="top:61px;left:785px"
           />
           <map-point
             :articleId="91"
