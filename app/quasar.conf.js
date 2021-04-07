@@ -128,8 +128,8 @@ module.exports = function(ctx) {
         description: `Einführung in die Nutzung des iPads im Unterricht`,
         display: "standalone",
         orientation: "portrait",
-        background_color: "#ffffff",
-        theme_color: "#027be3",
+        background_color: "#FFFFFF",
+        theme_color: "#457B9D",
         icons: [
           {
             src: "icons/icon-128x128.png",
@@ -160,7 +160,10 @@ module.exports = function(ctx) {
       },
       metaVariables: {
         appleMobileWebAppCapable: "yes",
+        //appleMobileWebAppStatusBarStyle: "black-translucent",
         appleMobileWebAppStatusBarStyle: "default",
+        appleTouchIcon: "icons/apple-icon-180x180.png",
+        appleTouchStartupImage: "icons/apple-launch-2048x2732.png",
         appleTouchIcon120: "icons/apple-icon-120x120.png",
         appleTouchIcon180: "icons/apple-icon-180x180.png",
         appleTouchIcon152: "icons/apple-icon-152x152.png",

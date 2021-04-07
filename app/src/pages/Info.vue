@@ -5,7 +5,11 @@
       Diese App/Website wurde für die Einführung der 1:1-Tablet-Umgebung in den
       Sekundarschulen der Stadt Winterthur entwickelt. Sie bietet Lehrerinnen
       und Lehrer, sowie Schülerinnen und Schüler die Möglichkeit, ihr neues
-      Arbeitsgerät selbständig kennenzulernen.
+      Arbeitsgerät selbständig kennenzulernen. Auch für die Eltern werden
+      wichtige Informationen bereitgestellt. Diese App kann auch als Webseite
+      unter
+      <a href="https://tablet.winschulen.ch">https://tablet.winschulen.ch</a>
+      benutzt werden.
     </p>
     <h2>Herausgeber</h2>
     <p>
@@ -21,9 +25,27 @@
         >https://stadt.winterthur.ch/schucom</a
       >
     </p>
+    <p>
+      <b>Konzept und Idee</b><br />
+      Michael Brügger, Christof Müller, Thomas Staub
+    </p>
+    <p>
+      <b>Autorinnen und Autoren</b><br />
+      Michael Brügger, Werner Heiniger, Christof Müller, Remo Müller, Corinne
+      Schafroth, Thomas Staub, Marcel Wettstein
+    </p>
+    <p>
+      <b>Illustrationen</b><br />
+      Nina Arigoni
+    </p>
+    <p>
+      <b>App- und Website-Entwicklung</b><br />
+      Christof Müller
+    </p>
+    <hr />
     <h2>Support</h2>
     <p>Der Support läuft wie gewohnt über den BSC vor Ort.</p>
-
+    <hr />
     <h3>Open Source</h3>
     <p>
       Die App wurde unter der
@@ -40,6 +62,7 @@
       allen zur Verfügung und darf nach Belieben angepasst und für eigene Zwecke
       genutzt werden.
     </p>
+    <hr />
     <h2>Zurücksetzen</h2>
     Alle Daten löschen (bereits gelesene Artikel, gespeicherte Anleitungen):
     <q-btn

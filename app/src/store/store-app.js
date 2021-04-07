@@ -33,7 +33,9 @@ const mutations = {
     state.initLoading = payload;
   },
   setUserMode(state, user) {
+    console.log("setUserMdoe");
     state.userMode = user;
+    state.routerHistory = [];
     LocalStorage.set("userMode", user);
   },
   setSavedArticles(state, articles) {

@@ -1,8 +1,8 @@
 {
   "name": "ch.winschulen.tablet",
-  "version": "0.0.1",
-  "description": "Tipps & Tricks zur Nutzung des iPads im Unterricht",
-  "productName": "iPad Hilfe",
+  "version": "1.0.0",
+  "description": "Anleitungen zur Nutzung des iPads im Unterricht",
+  "productName": "Mein Tablet",
   "author": "SCHU::COM <schucom@win.ch>",
   "private": true,
   "scripts": {

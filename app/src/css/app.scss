@@ -1,4 +1,7 @@
 // app global css in SCSS form
+body {
+  /*background-color: $primary;*/
+}
 .font-xs {
   font-size: 65%;
 }
@@ -15,6 +18,20 @@ h1 {
   margin: 0;
   padding: 0 0 20px 0;
   line-height: 40px;
+}
+
+.map-container {
+  width: 1024px;
+  height: 724px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.map-frame {
+  position: relative;
+}
+.map {
+  width: 100%;
+  height: auto;
 }
 .pointer {
   cursor: pointer;

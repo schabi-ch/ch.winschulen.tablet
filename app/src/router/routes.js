@@ -15,6 +15,11 @@ const routes = [
         component: () => import("pages/OverviewStudent.vue")
       },
       {
+        path: "/eltern",
+        name: "eltern",
+        component: () => import("pages/OverviewParent.vue")
+      },
+      {
         path: "/artikel/:id",
         name: "article",
         component: () => import("pages/Article.vue")

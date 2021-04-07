@@ -251,16 +251,6 @@
           />
         </div>
       </div>
-      <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-btn
-          type="a"
-          target="_blank"
-          href="https://winschulen.sharepoint.com/sites/ICTSek/Lists/Feedback%20Mein%20Tablet/AllItems.aspx"
-          round
-          color="secondary"
-          icon="feedback"
-        />
-      </q-page-sticky>
     </q-page>
   </div>
 </template>
@@ -299,19 +289,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.map-container {
-  width: 1024px;
-  height: 724px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-.map-frame {
-  position: relative;
-}
-.map {
-  width: 100%;
-  height: auto;
-}
-</style>

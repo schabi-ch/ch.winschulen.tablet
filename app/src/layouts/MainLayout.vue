@@ -1,7 +1,15 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated>
-      <q-toolbar style="padding: auto 0">
+    <q-header elevated v-if="userMode != null">
+      <q-toolbar style="padding: 0">
+        <q-btn
+          flat
+          stretch
+          icon="menu"
+          aria-label="Inhaltsverzeichnis"
+          @click="leftDrawerOpen = !leftDrawerOpen"
+          v-if="userMode != 'eltern'"
+        />
         <q-btn
           flat
           stretch
@@ -14,19 +22,12 @@
         <q-btn
           flat
           stretch
-          icon="map"
+          icon="home"
           @click="$router.push({ name: 'home' })"
           class="q-mr-md"
+          v-if="userMode != 'eltern'"
         ></q-btn>
         <search-field />
-        <q-btn
-          flat
-          stretch
-          icon="toc"
-          class="q-ml-md"
-          aria-label="Inhaltsverzeichnis"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
         <q-space />
         <q-btn
           flat
@@ -35,18 +36,45 @@
           class="q-ml-md"
           aria-label="Gespeicherte Artikel"
           @click="$router.push({ name: 'myArticles' })"
+          v-if="userMode != 'eltern'"
         />
         <q-btn flat stretch icon="more_horiz">
           <q-menu>
             <q-list style="min-width: 100px">
+              <q-item
+                clickable
+                @click="switchUserMode('lul')"
+                :class="userMode == 'lul' ? 'activeUserMode' : ''"
+              >
+                <q-item-section>Lehrpersonen-Ansicht</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                @click="switchUserMode('sus')"
+                :class="userMode == 'sus' ? 'activeUserMode' : ''"
+              >
+                <q-item-section>Schüler_innen-Ansicht</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                @click="switchUserMode('eltern')"
+                :class="userMode == 'eltern' ? 'activeUserMode' : ''"
+              >
+                <q-item-section>Eltern-Ansicht</q-item-section>
+              </q-item>
+              <q-separator />
               <q-item clickable @click="$router.push('/info')">
-                <q-item-section>Info</q-item-section>
+                <q-item-section>Infos zur App</q-item-section>
               </q-item>
               <q-item clickable @click="$router.push('/datenschutz')">
                 <q-item-section>Datenschutzerklärung</q-item-section>
               </q-item>
-              <q-separator />
-              <q-item clickable @click="openBackend">
+              <q-separator v-if="$q.platform.is.desktop" />
+              <q-item
+                clickable
+                @click="openBackend"
+                v-if="$q.platform.is.desktop"
+              >
                 <q-item-section>Backend</q-item-section>
               </q-item>
             </q-list>
@@ -63,34 +91,11 @@
       content-class="bg-grey-1"
     >
       <toc-categories />
-      <div class="q-ma-md font-sm">
-        <div class="q-py-sm">Ansicht wechseln:</div>
-        <q-btn-toggle
-          v-model="userModeSwitcher"
-          toggle-color="primary"
-          class="font-sm"
-          no-caps
-          rounded
-          @click="switchUserMode"
-          :options="[
-            { label: 'Lehrperson', value: 'lul' },
-            { label: 'Schüler_in', value: 'sus' }
-          ]"
-        />
-      </div>
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-page-sticky position="bottom-left" :offset="[18, 18]">
-      <q-btn
-        @click="leftDrawerOpen = !leftDrawerOpen"
-        round
-        color="accent"
-        icon="toc"
-      />
-    </q-page-sticky>
   </q-layout>
 </template>
 
@@ -99,6 +104,7 @@ import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 import TocCategories from "components/TocCategories.vue";
 import SearchField from "components/SearchField.vue";
+import { Platform } from "quasar";
 
 export default {
   name: "MainLayout",
@@ -114,9 +120,9 @@ export default {
   },
   methods: {
     ...mapActions("app", ["setUserMode", "getCategories", "search"]),
-    switchUserMode() {
-      this.setUserMode(this.userModeSwitcher);
-      this.$router.push(`/${this.userModeSwitcher}`);
+    switchUserMode(userMode) {
+      this.setUserMode(userMode);
+      this.$router.push(`/${userMode}`);
     },
     openBackend() {
       window.open("https://tablet-admin.winschulen.ch/wp-admin", "_blank");
@@ -130,7 +136,18 @@ export default {
     if (this.$q.localStorage.has("userMode")) {
       this.setUserMode(this.$q.localStorage.getItem("userMode"));
       this.userModeSwitcher = this.userMode;
+      console.log("userMode: " + this.userMode);
     }
   }
 };
 </script>
+
+<style lang="scss">
+.q-page-container {
+  background-color: white;
+}
+.activeUserMode {
+  background-color: $secondary;
+  color: white;
+}
+</style>

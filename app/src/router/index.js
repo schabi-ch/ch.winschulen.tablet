@@ -21,7 +21,16 @@ export default function({ store }) {
       if (fromHistory && store.state.app.routerHistory.length > 0) {
         store.dispatch("app/removeRouteFromHistory");
       } else {
-        if (from.name != "home") {
+        if (
+          store.state.app.routerHistory.length == 0 &&
+          to.name != null &&
+          to.name != "home" &&
+          to.name != "sus" &&
+          to.name != "lul" &&
+          to.name != "eltern"
+        ) {
+          //if (from.name != null && from.name != "home" && to.name != "eltern") {
+          console.log("from.name", from);
           store.dispatch("app/addRouteToHistory", from);
         }
       }
