@@ -4,31 +4,44 @@
     style="margin: 0 auto; max-width: 1200px"
     v-if="!initLoading"
   >
-    <h1 class="q-pa-md">Informationen für die Eltern (Prototyp)</h1>
+    <h1 class="q-pa-md">Informationen für die Eltern</h1>
     <div class="row">
       <div class="col-md-6 q-px-sm">
         <q-list bordered>
           <q-expansion-item
             icon="tv"
-            label="Warum bekommt jede Schülerin und jeder Schüler ein eigenes Tablet?"
+            label="Warum erhalten alle Sekundarschülerinnen und -schüler ein persönliches Gerät?"
             default-opened
             header-class="text-secondary"
           >
             <q-card>
               <q-card-section>
-                <youtube-video url="ToeFsdYUuss" />
+                <youtube-video url="09gnCBRt2NQ" />
               </q-card-section>
             </q-card>
           </q-expansion-item>
         </q-list>
       </div>
-      <div class="col-md-6 q-pl-sm">
+      <div class="col-md-6 q-pl-sm q-mb-md">
         <q-list bordered>
+          <q-expansion-item
+            group="somegroup"
+            icon="sentiment_very_satisfied"
+            label="Herzlich willkommen!"
+            default-opened
+            header-class="text-primary"
+          >
+            <q-card>
+              <q-card-section v-html="chapter0"> </q-card-section>
+            </q-card>
+          </q-expansion-item>
+
+          <q-separator />
+
           <q-expansion-item
             group="somegroup"
             icon="explore"
             label="Wie begleite ich mein Kind?"
-            default-opened
             header-class="text-primary"
           >
             <q-card>
@@ -94,6 +107,7 @@ export default {
   data() {
     return {
       loading: false,
+      chapter0: "",
       chapter1: "",
       chapter2: "",
       chapter3: "",
@@ -101,6 +115,7 @@ export default {
     };
   },
   async beforeMount() {
+    this.chapter0 = this.articles.find(i => i.id == 1079).content;
     this.chapter1 = this.articles.find(i => i.id == 1023).content;
     this.chapter2 = this.articles.find(i => i.id == 1025).content;
     this.chapter3 = this.articles.find(i => i.id == 1027).content;

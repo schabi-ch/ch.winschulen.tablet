@@ -19,7 +19,9 @@ h1 {
   padding: 0 0 20px 0;
   line-height: 40px;
 }
-
+p {
+  padding-bottom: 20px !important;
+}
 .map-container {
   width: 1024px;
   height: 724px;
