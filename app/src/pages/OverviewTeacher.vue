@@ -25,6 +25,48 @@
               coords="172,129,308,115,230,8,137,5"
               @click="clickFallschirm"
             />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="344,358,447,358,445,330,345,321"
+              @click="clickSchnitzeljagd"
+            />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="194,410,291,408,295,311,186,308"
+              @click="clickKletterpark"
+            />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="7,441,172,415,157,357,5,357"
+              @click="clickAdlerhorst"
+            />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="46,483,58,580,150,582,154,532,204,522,194,474"
+              @click="clickWandergruppe"
+            />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="193,559,173,620,172,698,278,702,356,564"
+              @click="clickMord"
+            />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="467,521,392,667,625,679,555,521"
+              @click="clickPanoramaweg"
+            />
+            <area
+              shape="poly"
+              class="pointer"
+              coords="650,676,970,705,1002,636,970,461,808,497,645,612"
+              @click="clickWege"
+            />
           </map>
           <!-- Dorfrundgang top=Y, left=X -->
           <map-point
@@ -282,8 +324,30 @@ export default {
       var category = this.categories.find(i => i.id == 25);
       this.setCurrentCategory(category);
       this.$router.push(`/kategorie/25`);
+    },
+    clickSchnitzeljagd() {
+      this.$router.push(`/artikel/1128`);
+    },
+    clickKletterpark() {
+      console.log("Kletterpark");
+    },
+    clickAdlerhorst() {
+      this.$router.push(`/artikel/1132`);
+    },
+    clickWandergruppe() {
+      this.$router.push(`/artikel/1146`);
+    },
+    clickMord() {
+      console.log("Mord");
+    },
+    clickPanoramaweg() {
+      console.log("Panoramaweg");
+    },
+    clickWege() {
+      console.log("Wege");
     }
   },
+
   created() {
     this.setCurrentCategory(null);
   }
