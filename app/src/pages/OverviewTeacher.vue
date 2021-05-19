@@ -329,7 +329,7 @@ export default {
       this.$router.push(`/artikel/1128`);
     },
     clickKletterpark() {
-      console.log("Kletterpark");
+      this.$router.push(`/artikel/1130`);
     },
     clickAdlerhorst() {
       this.$router.push(`/artikel/1132`);
@@ -338,13 +338,13 @@ export default {
       this.$router.push(`/artikel/1146`);
     },
     clickMord() {
-      console.log("Mord");
+      this.$router.push(`/artikel/1178`);
     },
     clickPanoramaweg() {
-      console.log("Panoramaweg");
+      this.$router.push(`/artikel/1188`);
     },
     clickWege() {
-      console.log("Wege");
+      this.$router.push(`/artikel/1190`);
     }
   },
 
