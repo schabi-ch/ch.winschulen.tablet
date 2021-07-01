@@ -10,7 +10,7 @@ Departement Schule und Sport
 Pionierstrasse 7
 8400 Winterthur
 
-E-Mail: kontakt@tablet.winschulen.ch
+E-Mail: schucom@win.ch
 
 Website: https://stadt.winterthur.ch/schucom
 
