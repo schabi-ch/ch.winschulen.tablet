@@ -19,6 +19,11 @@ const routes = [
         name: "eltern",
         component: () => import("pages/OverviewParent.vue")
       },
+       {
+        path: "/presse",
+        name: "presse",
+        component: () => import("pages/Press.vue")
+      },
       {
         path: "/artikel/:id",
         name: "article",

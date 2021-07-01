@@ -10,7 +10,7 @@
         <p>Inhalt wird geladen, bitte kurz warten...</p>
       </div>
       <div v-else class="map-frame">
-        <img src="Schulhaus.jpg" class="map" usemap="#schulhaus" />
+        <img src="WanderkarteSuS.jpg" class="map" usemap="#schulhaus" />
         <map name="wanderkarte">
           <!--
             <area
@@ -21,126 +21,126 @@
             />
             -->
         </map>
-        <!-- Spielplatz top=Y, left=X -->
+        <!-- Altstadt top=Y, left=X -->
         <map-point
           :articleId="777"
           :categoryId="14"
-          style="top:668px;left:649px"
+          style="top:249px;left:586px"
         />
         <map-point
           :articleId="783"
           :categoryId="14"
-          style="top:668px;left:529px"
+          style="top:195px;left:661px"
         />
         <map-point
           :articleId="785"
           :categoryId="14"
-          style="top:669px;left:387px"
+          style="top:92px;left:784px"
         />
         <map-point
           :articleId="787"
           :categoryId="14"
-          style="top:687px;left:236px"
+          style="top:172px;left:860px"
         />
 
-        <!-- Erste Schritte -->
+        <!-- Drills Park -->
         <map-point
           :articleId="14"
           :categoryId="29"
-          style="top:571px;left:443px"
+          style="top:330px;left:899px"
         />
         <map-point
           :articleId="17"
           :categoryId="29"
-          style="top:529px;left:489px"
+          style="top:411px;left:936px"
         />
         <map-point
           :articleId="19"
           :categoryId="29"
-          style="top:422px;left:636px"
+          style="top:504px;left:927px"
         />
         <map-point
           :articleId="70"
           :categoryId="29"
-          style="top:463px;left:664px"
+          style="top:569px;left:831px"
         />
         <map-point
           :articleId="27"
           :categoryId="29"
-          style="top:450px;left:709px"
+          style="top:528px;left:709px"
         />
         <map-point
           :articleId="77"
           :categoryId="29"
-          style="top:465px;left:770px"
+          style="top:523px;left:606px"
         />
 
-        <!-- 1x1 Zimmer -->
+        <!-- Waldegg-See -->
         <map-point
           :articleId="79"
           :categoryId="30"
-          style="top:329px;left:792px"
+          style="top:692px;left:538px"
         />
         <map-point
           :articleId="81"
           :categoryId="30"
-          style="top:326px;left:732px"
+          style="top:672px;left:405px"
         />
         <map-point
           :articleId="91"
           :categoryId="30"
-          style="top:310px;left:673px"
+          style="top:689px;left:268px"
         />
         <map-point
           :articleId="99"
           :categoryId="30"
-          style="top:320px;left:620px"
+          style="top:648px;left:142px"
         />
 
         <!-- Projektzimmer -->
         <map-point
           :articleId="72"
           :categoryId="31"
-          style="top:329px;left:313px"
+          style="top:339px;left:21px"
         />
         <map-point
           :articleId="83"
           :categoryId="31"
-          style="top:329px;left:252px"
+          style="top:278px;left:25px"
         />
         <map-point
           :articleId="139"
           :categoryId="31"
-          style="top:327px;left:196px"
+          style="top:247px;left:76px"
         />
 
         <!-- Kopierzimmer -->
         <map-point
           :articleId="95"
           :categoryId="32"
-          style="top:183px;left:102px"
+          style="top:462px;left:235px"
         />
         <map-point
           :articleId="97"
           :categoryId="32"
-          style="top:210px;left:84px"
+          style="top:423px;left:172px"
         />
 
         <!-- Kreativzimmer -->
         <map-point
           :articleId="23"
           :categoryId="33"
-          style="top:149px;left:169px"
+          style="top:247px;left:295px"
         />
         <map-point
           :articleId="85"
           :categoryId="33"
-          style="top:127px;left:234px"
+          style="top:198px;left:220px"
         />
         <map-point
           :articleId="151"
           :categoryId="33"
-          style="top:197px;left:327px"
+          style="top:151px;left:286px"
         />
       </div>
     </div>

@@ -8,7 +8,7 @@
           icon="menu"
           aria-label="Inhaltsverzeichnis"
           @click="leftDrawerOpen = !leftDrawerOpen"
-          v-if="userMode != 'eltern'"
+          v-if="userMode != 'eltern' && userMode != 'public'"
         />
         <q-btn
           flat
@@ -25,7 +25,7 @@
           icon="home"
           @click="$router.push({ name: 'home' })"
           class="q-mr-md"
-          v-if="userMode != 'eltern'"
+          v-if="userMode != 'eltern' && userMode != 'public'"
         ></q-btn>
         <search-field />
         <q-space />
@@ -36,7 +36,7 @@
           class="q-ml-md"
           aria-label="Gespeicherte Artikel"
           @click="$router.push({ name: 'myArticles' })"
-          v-if="userMode != 'eltern'"
+          v-if="userMode != 'eltern' && userMode != 'public'"
         />
         <q-btn flat stretch icon="more_horiz">
           <q-menu>
@@ -69,11 +69,11 @@
               <q-item clickable @click="$router.push('/datenschutz')">
                 <q-item-section>Datenschutzerklärung</q-item-section>
               </q-item>
-              <q-separator v-if="$q.platform.is.desktop" />
+              <q-separator v-if="$q.platform.is.desktop && userMode != 'public' && userMode != 'eltern'" />
               <q-item
                 clickable
                 @click="openBackend"
-                v-if="$q.platform.is.desktop"
+                v-if="$q.platform.is.desktop && userMode != 'public' && userMode != 'eltern'"
               >
                 <q-item-section>Backend</q-item-section>
               </q-item>
