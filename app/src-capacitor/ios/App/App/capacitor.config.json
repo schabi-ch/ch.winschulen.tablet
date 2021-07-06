@@ -1,12 +1,10 @@
 {
-  "appId": "ch.winschulen.tablet.test",
-  "appName": "iPad Hilfe",
+  "appId": "ch.winschulen.tablet",
+  "appName": "Mein Tablet",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "www",
   "server": {
-    "allowNavigation": [
-      "https://tablet-admin.winschulen.ch/"
-    ]
+    "url": "http://192.168.1.12:8081"
   }
 }

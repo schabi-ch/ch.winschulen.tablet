@@ -1,12 +1,7 @@
 {
-  "appId": "ch.winschulen.tablet.test",
+  "appId": "ch.winschulen.tablet",
   "appName": "Mein Tablet",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
-  "webDir": "www",
-  "server": {
-    "allowNavigation": [
-      "https://tablet-admin.winschulen.ch/"
-    ]
-  }
+  "webDir": "www"
 }
