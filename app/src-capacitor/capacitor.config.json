@@ -1,5 +1,5 @@
 {
-  "appId": "ch.winschulen.tablet",
+  "appId": "ch.winschulen.tablet.test",
   "appName": "Mein Tablet",
   "bundledWebRuntime": false,
   "npmClient": "yarn",

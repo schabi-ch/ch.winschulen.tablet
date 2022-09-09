@@ -10,16 +10,23 @@
         <p>Inhalt wird geladen, bitte kurz warten...</p>
       </div>
       <div v-else class="map-frame">
-        <img src="WanderkarteSuS.jpg" class="map" usemap="#schulhaus" />
-        <map name="wanderkarte">
-          <!--
-            <area
-              shape="poly"
-              class="pointer"
-              coords="366,550,396,480,330,456,253,459,258,541"
-              @click="clickHelppoint"
-            />
-            -->
+        <img src="WanderkarteSuS-2.jpg" class="map" usemap="#wanderkarteSus" />
+
+        <map name="wanderkarteSus">
+          <!-- App in the sky -->
+          <area
+            shape="poly"
+            class="pointer"
+            coords="366,550,396,480,330,456,253,459,258,541"
+            @click="clickAppInTheSky"
+          />
+          <area
+            shape="rect"
+            class="pointer"
+            coords="375,0,530,126"
+            style="border: solid 1px red"
+            @click="clickAppInTheSky"
+          />
         </map>
         <!-- Altstadt top=Y, left=X -->
         <map-point
@@ -160,7 +167,10 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions("app", ["setCurrentCategory"])
+    ...mapActions("app", ["setCurrentCategory"]),
+    clickAppInTheSky() {
+      this.$router.push(`/artikel/1288`);
+    }
   },
   created() {
     this.setCurrentCategory(null);
