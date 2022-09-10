@@ -14,20 +14,24 @@ const state = {
   articles: [],
   savedArticles: [],
   searchResults: null,
-  searchString: ""
+  searchString: "",
+  error: null
 };
 
 const mutations = {
   resetState(state) {
     state.routerHistory = [];
-    (state.userMode = null), (state.tasksDone = []);
+    state.userMode = null;
+    state.tasksDone = [];
     state.categoryTree = [];
     state.categories = [];
     state.categoriesSuS = [];
     state.categoriesLuL = [];
-    (state.currentCategory = null), (state.articles = []);
+    state.currentCategory = null;
+    state.articles = [];
     state.savedArticles = [];
-    (state.searchResults = null), (state.searchString = "");
+    state.searchResults = null;
+    state.searchString = "";
   },
   setInitLoading(state, payload) {
     state.initLoading = payload;
@@ -139,6 +143,9 @@ const mutations = {
 
     var index = state.articles.findIndex(q => q.id == payload.id);
     state.articles[index].done = payload.value;
+  },
+  setError(state, error) {
+    state.error = error;
   }
 };
 
@@ -174,8 +181,11 @@ const actions = {
         commit("setArticles", articles);
       })
       .catch(error => {
-        this.error = error;
-        console.log("error", error);
+        commit(
+          "setError",
+          "Fehler beim Laden der Anleitungen: " + error.message
+        );
+        console.log(error);
       });
 
     // --------------------
@@ -205,7 +215,10 @@ const actions = {
         });
       })
       .catch(error => {
-        this.error = error;
+        commit(
+          "setError",
+          "Fehler beim Laden der Kategorien: " + error.message
+        );
         console.log("error", error);
       });
 
@@ -308,6 +321,9 @@ const actions = {
   },
   removeRouteFromHistory({ commit }) {
     commit("removeRouteFromHistory");
+  },
+  setError({ commit }, error) {
+    commit("setError", error);
   }
 };
 
@@ -379,6 +395,9 @@ const getters = {
   },
   savedArticles: state => {
     return state.savedArticles;
+  },
+  error: state => {
+    return state.error;
   }
 };
 

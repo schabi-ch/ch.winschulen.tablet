@@ -69,11 +69,21 @@
               <q-item clickable @click="$router.push('/datenschutz')">
                 <q-item-section>Datenschutzerklärung</q-item-section>
               </q-item>
-              <q-separator v-if="$q.platform.is.desktop && userMode != 'public' && userMode != 'eltern'" />
+              <q-separator
+                v-if="
+                  $q.platform.is.desktop &&
+                    userMode != 'public' &&
+                    userMode != 'eltern'
+                "
+              />
               <q-item
                 clickable
                 @click="openBackend"
-                v-if="$q.platform.is.desktop && userMode != 'public' && userMode != 'eltern'"
+                v-if="
+                  $q.platform.is.desktop &&
+                    userMode != 'public' &&
+                    userMode != 'eltern'
+                "
               >
                 <q-item-section>Backend</q-item-section>
               </q-item>
@@ -94,23 +104,36 @@
     </q-drawer>
 
     <q-page-container>
+      <q-banner
+        v-if="error != null"
+        inline-actions
+        class="bg-negative text-white"
+        >{{ error }}
+        <template v-slot:action>
+          <q-btn
+            flat
+            color="white"
+            icon="cancel"
+            round
+            @click="setError(null)"
+          />
+        </template>
+      </q-banner>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 import TocCategories from "components/TocCategories.vue";
 import SearchField from "components/SearchField.vue";
-import { Platform } from "quasar";
 
 export default {
   name: "MainLayout",
   components: { TocCategories, SearchField },
   computed: {
-    ...mapGetters("app", ["userMode", "previousRoute"])
+    ...mapGetters("app", ["userMode", "previousRoute", "error"])
   },
   data() {
     return {
@@ -119,7 +142,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions("app", ["setUserMode", "getCategories", "search"]),
+    ...mapActions("app", [
+      "setUserMode",
+      "getCategories",
+      "search",
+      "setError"
+    ]),
     switchUserMode(userMode) {
       this.setUserMode(userMode);
       this.$router.push(`/${userMode}`);
