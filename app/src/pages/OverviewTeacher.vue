@@ -344,7 +344,7 @@ export default {
       this.$router.push(`/artikel/1188`);
     },
     clickWege() {
-      this.$router.push(`/artikel/1190`);
+      this.$router.push(`/artikel/1584`);
     }
   },
 
