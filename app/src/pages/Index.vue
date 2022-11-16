@@ -61,7 +61,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("app", ["setUserMode"]),
+    ...mapActions("app", ["setUserMode", "setError"]),
     switchUserMode(mode) {
       this.setUserMode(mode);
       this.$router.push(`/${mode}`);
@@ -72,8 +72,19 @@ export default {
       delay: 200,
       message: "Inhalt wird geladen..."
     });
-    if (this.userMode) {
-      this.$router.replace(`/${this.userMode}`);
+    if (this.userMode != null) {
+      if (
+        this.userMode != "lul" &&
+        this.userMode != "sus" &&
+        this.userMode != "public" &&
+        this.userMode != "eltern"
+      ) {
+        this.setError("Unbekannter Modus: " + this.userMode);
+        this.setUserMode(null);
+        this.loading = false;
+      } else {
+        this.$router.replace(`/${this.userMode}`);
+      }
     } else {
       this.loading = false;
     }

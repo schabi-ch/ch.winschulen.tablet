@@ -18,9 +18,7 @@ export default {
 
   async created() {
     this.$q.loading.show({ message: "Inhalt wird geladen..." });
-
     await this.init();
-
     this.$q.loading.hide();
   }
 };

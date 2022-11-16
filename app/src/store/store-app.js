@@ -108,7 +108,10 @@ const mutations = {
             });
           })
           .catch(error => {
-            this.error = error;
+            commit(
+              "setError",
+              "Fehler beim Laden der Anleitungen: " + error.message
+            );
             console.log("error", error);
           });
       } else {
@@ -145,7 +148,13 @@ const mutations = {
     state.articles[index].done = payload.value;
   },
   setError(state, error) {
-    state.error = error;
+    if (error == null) {
+      state.error = null;
+    } else if (state.error == null) {
+      state.error = error;
+    } else {
+      state.error += " // " + error;
+    }
   }
 };
 
@@ -183,7 +192,11 @@ const actions = {
       .catch(error => {
         commit(
           "setError",
-          "Fehler beim Laden der Anleitungen: " + error.message
+          "Fehler beim Laden der Anleitungen (init): " +
+            error.message +
+            " (" +
+            error +
+            ")"
         );
         console.log(error);
       });
@@ -217,7 +230,7 @@ const actions = {
       .catch(error => {
         commit(
           "setError",
-          "Fehler beim Laden der Kategorien: " + error.message
+          "Fehler beim Laden der Kategorien (init): " + error.message
         );
         console.log("error", error);
       });
@@ -289,7 +302,10 @@ const actions = {
           });
         })
         .catch(error => {
-          this.error = error;
+          commit(
+            "setError",
+            "Fehler beim Laden der Kategorien (getCategories): " + error.message
+          );
           console.log("error", error);
         });
       commit("setCategoryTree", categoryTree);
@@ -328,30 +344,38 @@ const actions = {
 };
 
 function buildTree(node, data, categories, articles) {
-  var nextLayer = data.filter(p => p.parent == node.id);
-  // sort by number before name (ex. 001 Kategoriename)
-  nextLayer.sort((a, b) =>
-    a.title > b.title ? 1 : b.title > a.title ? -1 : 0
-  );
-  // remove sorting number from category name
-  nextLayer.forEach(n => {
-    n.name = n.name.substring(n.name.indexOf(" ") + 1);
-  });
-
-  if (nextLayer.length > 0) {
-    node.children = [];
+  try {
+    var nextLayer = data.filter(p => p.parent == node.id);
+    // sort by number before name (ex. 001 Kategoriename)
+    nextLayer.sort((a, b) =>
+      a.title > b.title ? 1 : b.title > a.title ? -1 : 0
+    );
+    // remove sorting number from category name
     nextLayer.forEach(n => {
-      var newNode = { id: n.id, label: n.name };
-      var articlesForCategory = articles.filter(f =>
-        f.categories.includes(n.id)
-      );
-      newNode.articles = articlesForCategory;
-      newNode = buildTree(newNode, data, categories, articles);
-      node.children.push(newNode);
-      categories.push(newNode);
+      n.name = n.name.substring(n.name.indexOf(" ") + 1);
     });
+
+    if (nextLayer.length > 0) {
+      node.children = [];
+      nextLayer.forEach(n => {
+        var newNode = { id: n.id, label: n.name };
+        var articlesForCategory = articles.filter(f =>
+          f.categories.includes(n.id)
+        );
+        newNode.articles = articlesForCategory;
+        newNode = buildTree(newNode, data, categories, articles);
+        node.children.push(newNode);
+        categories.push(newNode);
+      });
+    }
+  } catch (error) {
+    commit(
+      "setError",
+      "Fehler beim Einrichten der Kategorien (buildTree): " + error
+    );
+  } finally {
+    return node;
   }
-  return node;
 }
 
 const getters = {
