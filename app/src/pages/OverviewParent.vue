@@ -10,13 +10,21 @@
         <q-list bordered>
           <q-expansion-item
             icon="tv"
-            label="Warum erhalten alle Sekundarschülerinnen und -schüler ein persönliches Gerät?"
+            label="Warum erhalten alle Schülerinnen und Schüler ab der 5. Klasse ein persönliches Gerät?"
             default-opened
             header-class="text-secondary"
           >
             <q-card>
-              <q-card-section>
-                <youtube-video url="09gnCBRt2NQ" />
+              <q-card-section class="text-center">
+                <!-- <youtube-video url="09gnCBRt2NQ" /> -->
+                <iframe
+                  src="https://player.vimeo.com/video/809675773?h=867891277d"
+                  width="640"
+                  height="360"
+                  frameborder="0"
+                  allow="autoplay; fullscreen"
+                  allowfullscreen
+                ></iframe>
               </q-card-section>
             </q-card>
           </q-expansion-item>
@@ -95,11 +103,10 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import YoutubeVideo from "components/YouTubeVideo";
-
+// import YoutubeVideo from "components/YouTubeVideo";
 export default {
   components: {
-    YoutubeVideo
+    // YoutubeVideo,
   },
   computed: {
     ...mapGetters("app", ["initLoading", "articles"])
